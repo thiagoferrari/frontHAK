@@ -1,0 +1,16 @@
+{
+  "title": "MiniDrawer Material Demo",
+  "name": "MiniDrawer Material Demo",
+  "devDependencies": {
+    "react-scripts": "latest"
+  },
+  "description": "https://github.com/mui-org/material-ui/blob/v5.0.0/docs/src/pages/components/drawers/MiniDrawer.js",
+  "dependencies": {
+    "react-dom": "latest",
+    "react": "latest",
+    "@mui/material": "latest",
+    "@mui/icons-material": "latest",
+    "@emotion/styled": "latest",
+    "@emotion/react": "latest"
+  }
+}

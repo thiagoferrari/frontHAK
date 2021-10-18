@@ -1,0 +1,22 @@
+export const SliderData = [
+	{
+		image:
+			'https://www.kardec.org.br/user-files/misc/2020-03-27-fak-14.jpg'
+	},
+	{
+		image:
+			'https://www.kardec.org.br/user-files/misc/2020-03-27-fak-01.jpg'
+	},
+	{
+		image:
+			'https://www.kardec.org.br/user-files/misc/2020-03-27-fak-02.jpg'
+	},
+	{
+		image:
+			'https://www.kardec.org.br/user-files/misc/2020-03-27-fak-05.jpg'
+	},
+	{
+		image:
+			'https://www.kardec.org.br/user-files/misc/2020-03-27-fak-06.jpg'
+	},
+];
