@@ -48,15 +48,13 @@ export default function BasicCard() {
 	const [dados, setDados] = React.useState(null)
 
 	React.useEffect(async () => {
-		let { data } = await axios.get('http://192.168.1.196:3333/Comunicados')
+		let { data } = await axios.get('http://192.168.1.196:3333/Pabxs')
 		setDados(data)
 	}, [])
 
 	return (
 		<div className={classes.div}>
-			<h1 className={classes.titulo} >Seja bem vindo ao Intranet</h1>
-			<ImageSlider slides={SliderData} />
-			<h1 className={classes.titulo} >Comunicados Importantes</h1>
+			<h1 className={classes.titulo} >Operações do PABX</h1>
 			{dados &&
 				dados.map((obj, index) => {
 					return (

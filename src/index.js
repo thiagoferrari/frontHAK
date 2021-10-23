@@ -5,10 +5,10 @@ import Drawer from './ui/Drawer';
 import Home from './ui/Home';
 import Empresa from './ui/Empresa';
 import Sugestoes from './ui/Sugestoes';
+import Politicas from './ui/Politicas';
+import Pabx from './ui/Pabx';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { Box } from '@mui/material';
-
-
 
 ReactDOM.render(
   <StyledEngineProvider injectFirst>
@@ -23,6 +23,18 @@ ReactDOM.render(
           </Route>
           <Route exact path="/empresa">
             <Drawer corpo={<Empresa />} />
+          </Route>
+          {/*           <Route exact path="/ramais">
+            <Drawer corpo={<Ramais />} />
+          </Route>
+          <Route exact path="/emails">
+            <Drawer corpo={<Emails />} />
+          </Route> */}
+          <Route exact path="/politicas">
+            <Drawer corpo={<Politicas />} />
+          </Route>
+          <Route exact path="/pabx">
+            <Drawer corpo={<Pabx />} />
           </Route>
         </Switch>
       </Box>

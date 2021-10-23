@@ -24,58 +24,69 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { LensTwoTone } from '@material-ui/icons';
 import { LegendToggleRounded } from '@mui/icons-material';
 
+import axios from 'axios';
+
+import { makeStyles } from '@mui/styles';
+
+const useStyles = makeStyles(() => ({
+	card: {
+		maxWidth: 345,
+		display: 'inline-block',
+		marginRight: '10px',
+		marginLeft: '10px'
+	}
+}));
+
 export default function MediaCard() {
-	const [dense, setDense] = React.useState(false);
-	const [secondary, setSecondary] = React.useState(true);
 
-	const dados = {
-		'Fantasia': 'Hospital Psiquiátrico Allan Kardec',
-		'Razão Social': 'Fundação Espírita Allan Kardec',
-		'CNPJ': '47.957.667/0001-40',
-		'CEP': '14401-080',
-		'Endereço': 'Rua José Marques Garcia, Nº 675. Cidade Nova. Franca - SP',
-		'E-mail': 'contato@kardec.org.br',
-		'E-mail NF': 'nf@kardec.org.br'
-	}
+	const classes = useStyles();
 
-	function dadosEmpresa() {
-		let dadosComponente = []
+	const [dados, setDados] = React.useState(null)
 
-		for (let [key, value] of Object.entries(dados)) {
-			dadosComponente.push(
-				<ListItem>
-					<ListItemText
-						primary={<b>{key}</b>}
-						secondary={value}
-					/>
-				</ListItem>)
-		}
+	const [titulos, setTitulos] = React.useState(
+		['Nome Fantasia', 'Razão Social', 'CNPJ',
+			'Inscr. Estadual/Municipal', 'CEP', 'Endereço',
+			'Email Contato', 'Email NF-e'])
 
-		return dadosComponente
-	}
+	React.useEffect(async () => {
+		let { data } = await axios.get('http://192.168.1.196:3333/Empresas')
+		setDados(data)
+	}, [])
 
 	return (
 		<Box sx={{ flexGrow: 1, maxWidth: 752 }}>
-			<Card sx={{ maxWidth: 345 }}>
-				<CardMedia
-					component="img"
-					height="140"
-					image={kardecLogo}
-				/>
-				<CardContent>
-					<Grid container spacing={2}>
-						<Grid item >
-							<List dense={dense}>
-								{dadosEmpresa()}
-							</List>
-						</Grid>
-					</Grid>
-				</CardContent>
-				<CardActions>
-					<Button size="small">SITE</Button>
-					<Button size="small">INSTAGRAM</Button>
-				</CardActions>
-			</Card>
-		</Box>
+			{dados &&
+				dados.map((obj, index) => {
+					delete obj.id
+					return (
+						<Card className={classes.card}>
+							<CardMedia
+								component="img"
+								height="140"
+								image={kardecLogo}
+							/>
+							<CardContent>
+								{
+									titulos.map((t, index2) => {
+										return (
+											<ListItem>
+												<ListItemText
+													primary={<b>{t}</b>}
+													secondary={<i>{Object.values(obj)[index2]}</i>} />
+											</ListItem>
+										)
+									})
+								}
+							</CardContent>
+							<CardActions>
+								<Button size="small">INSTAGRAM</Button>
+								<Button size="small">SITE</Button>
+								<Button size="small">FACEBOOK</Button>
+							</CardActions>
+						</Card>
+					)
+				})
+			}
+		</Box >
 	);
 }

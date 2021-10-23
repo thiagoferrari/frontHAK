@@ -83,7 +83,7 @@ const useStyles = makeStyles(theme => ({
 	logoHorizontallyCenter: {
 		position: 'absolute',
 		left: '50%',
-		top: '120%',
+		top: '100%',
 		transform: 'translate(-50%, -50%)',
 		borderRadius: '500px'
 	}

@@ -1,16 +1,32 @@
 {
-  "title": "MiniDrawer Material Demo",
-  "name": "MiniDrawer Material Demo",
+  "title": "intranetHAK",
+  "name": "intranetHAK",
   "devDependencies": {
     "react-scripts": "latest"
   },
-  "description": "https://github.com/mui-org/material-ui/blob/v5.0.0/docs/src/pages/components/drawers/MiniDrawer.js",
   "dependencies": {
-    "react-dom": "latest",
+    "@material-ui/core": "latest",
+    "@material-ui/icons": "latest",
+    "classnames": "latest",
+    "moment": "latest",
+    "node-sass": "latest",
+    "nouislider": "latest",
+    "prop-types": "latest",
     "react": "latest",
+    "react-datetime": "latest",
+    "react-dom": "latest",
+    "react-router-dom": "latest",
+    "react-scripts": "latest",
+    "react-slick": "latest",
     "@mui/material": "latest",
     "@mui/icons-material": "latest",
     "@emotion/styled": "latest",
     "@emotion/react": "latest"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build && gulp licenses",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   }
 }

@@ -16,58 +16,69 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import SendIcon from '@mui/icons-material/Send';
 import Stack from '@mui/material/Stack';
 
+import axios from 'axios';
+
 export default function () {
 	const [anonimo, setAnonimo] = React.useState(false)
+	const [form, setForm] = React.useState({
+		stAtivo: "S",
+		nmPessoa: '',
+		dsSugestao: ''
+	})
 
-	const handleChange = () => {
+	const handleAnonimo = () => {
+		const { nmPessoa } = form
 		setAnonimo(!anonimo)
+		setForm({ ...form, nmPessoa: '' })
 	}
 
-	const handleSubmit = (event) => {
-		event.preventDefault();
-		const data = new FormData(event.currentTarget);
-		console.log({
-			email: data.get('email'),
-			password: data.get('password'),
-		});
-	};
+	async function hanldeSubmit() {
+		event.preventDefault()
+		await axios.post('http://192.168.1.196:3333/Sugestao', form)
+	}
+
+	function handleChange({ target }) {
+		const { id, value } = target
+		setForm({ ...form, [id]: value })
+		/* esse [id] recebe o id do input */
+	}
 
 	return (
-		<Container component="main" maxWidth="xs">
-			<Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1, marginTop: '100px' }}>
-				<TextField
-					margin="normal"
-					required
-					multiline
-					rows={4}
-					fullWidth
-					id="sugestao"
-					label="Digite sua Sugestão"
-					name="sugestao"
-					autoComplete="sugestao"
-					autoFocus
-				/>
-				<TextField
-					margin="normal"
-					required
-					multiline
-					fullWidth
-					name="nome"
-					label="Digite seu nome"
-					id="nome"
-					autoComplete="current-password"
-					disabled={anonimo}
-				/>
-				<FormControlLabel
-					control={<Checkbox value="remember" color="primary" onChange={handleChange} />}
-					label="Manter sugestão anônima"
-				/>
-				<Stack direction="row" spacing={2}>
-					<Button variant="contained" endIcon={<SendIcon />}>
-						Send
-					</Button>
-				</Stack>
-			</Box>
-		</Container>
+		<form onSubmit={hanldeSubmit}>
+			<TextField
+				margin="normal"
+				required
+				multiline
+				rows={4}
+				fullWidth
+				id="dsSugestao"
+				label="Digite sua Sugestão"
+				name="dsSugestao"
+				value={form.dsSugestao}
+				autoComplete="dsSugestao"
+				onChange={handleChange}
+				autoFocus
+			/>
+			<TextField
+				margin="normal"
+				multiline
+				fullWidth
+				name="nmPessoa"
+				label="Digite seu nome"
+				id="nmPessoa"
+				value={form.nmPessoa}
+				onChange={handleChange}
+				disabled={anonimo}
+			/>
+			<FormControlLabel
+				control={<Checkbox onChange={handleAnonimo} />}
+				label="Manter sugestão anônima"
+			/>
+			<Stack direction="row" spacing={2}>
+				<Button variant="contained" endIcon={<SendIcon />} onClick={hanldeSubmit}>
+					Send
+				</Button>
+			</Stack>
+		</form>
 	)
 }
