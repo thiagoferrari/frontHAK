@@ -17,8 +17,7 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import MenuIcon from "@material-ui/icons/Menu";
 
-import logo from '../img/logo.png'
-import imgFaixada from '../img/home.jpg'
+import logo from '../../img/logo.png'
 
 import HomeIcon from '@mui/icons-material/Home'; //Página Inicial
 import LightbulbIcon from '@mui/icons-material/Lightbulb'; //Sugestões
@@ -33,6 +32,8 @@ import AssignmentIndIcon from '@mui/icons-material/AssignmentInd'; //Gestão de 
 import WatchLaterIcon from '@mui/icons-material/WatchLater'; //Ocorrência de Ponto
 import NewReleasesIcon from '@mui/icons-material/NewReleases'; //Ocorrência de Acidente
 import FoodBankIcon from '@mui/icons-material/FoodBank'; //Portal Refeição
+import ExtensionIcon from '@mui/icons-material/Extension'; //Area Administrativa
+
 import { Button } from "@mui/material";
 
 
@@ -44,7 +45,7 @@ const useStyles = makeStyles(theme => ({
 	},
 	appBar: {
 		zIndex: theme.zIndex.drawer + 1,
-		background: 'orange'
+		background: 'black'
 	},
 	drawer: {
 		flexShrink: 0,
@@ -65,27 +66,15 @@ const useStyles = makeStyles(theme => ({
 			display: "none"
 		}
 	},
-	content: {
-		flexGrow: 1,
-		backgroundColor: theme.palette.background.default,
-		padding: theme.spacing(3)
-	},
 	logo: {
-		/* margin: 'auto',
-		textAlign: 'center',
-		maxWidth: '50%',
-		minHeight: '150px',
-		maxHeight: '70%',
-		borderRadius: '500px' */
 		marginLeft: '5%',
-		borderRadius: '20px'
+		maxWidth: '30%'
 	},
 	logoHorizontallyCenter: {
-		position: 'absolute',
+		position: 'fixed',
 		left: '50%',
-		top: '100%',
-		transform: 'translate(-50%, -50%)',
-		borderRadius: '500px'
+		top: '4%',
+		transform: 'translate(-20%, -50%)',
 	}
 }));
 
@@ -137,13 +126,15 @@ export default function (props) {
 				onClose={toggleDrawer}
 			>
 				<div className={classes.toolbar} />
+
 				<Divider />
+
 				<Button href='/' sx={{ textTransform: 'none' }}>
 					<ListItem button>
 						<ListItemIcon>
 							<HomeIcon />
 						</ListItemIcon>
-						<ListItemText primary={'Página Inicial'} />
+						<ListItemText primary={'Colaboradores'} />
 					</ListItem>
 				</Button>
 
@@ -152,9 +143,10 @@ export default function (props) {
 						<ListItemIcon>
 							<LightbulbIcon />
 						</ListItemIcon>
-						<ListItemText primary={'Sugestões'} />
+						<ListItemText primary={'Comunicados'} />
 					</ListItem>
 				</Button>
+
 				<Divider />
 
 				<Button href='/empresa' sx={{ textTransform: 'none' }}>
@@ -162,7 +154,7 @@ export default function (props) {
 						<ListItemIcon>
 							<InfoIcon />
 						</ListItemIcon>
-						<ListItemText primary={'Dados da Empresa'} />
+						<ListItemText primary={'Empresas'} />
 					</ListItem>
 				</Button>
 
@@ -171,7 +163,7 @@ export default function (props) {
 						<ListItemIcon>
 							<AddIcCallIcon />
 						</ListItemIcon>
-						<ListItemText primary={'Lista de Ramais'} />
+						<ListItemText primary={'Setores'} />
 					</ListItem>
 				</Button>
 
@@ -180,7 +172,7 @@ export default function (props) {
 						<ListItemIcon>
 							<AlternateEmailIcon />
 						</ListItemIcon>
-						<ListItemText primary={'Lista de E-mails'} />
+						<ListItemText primary={'Políticas'} />
 					</ListItem>
 				</Button>
 
@@ -189,7 +181,7 @@ export default function (props) {
 						<ListItemIcon>
 							<LocalPoliceIcon />
 						</ListItemIcon>
-						<ListItemText primary={'Políticas Internas'} />
+						<ListItemText primary={'Ramais'} />
 					</ListItem>
 				</Button>
 
@@ -198,44 +190,27 @@ export default function (props) {
 						<ListItemIcon>
 							<DialerSipIcon />
 						</ListItemIcon>
-						<ListItemText primary={'Operações do PABX'} />
+						<ListItemText primary={'Instruções PABX'} />
 					</ListItem>
 				</Button>
+
 				<Divider />
 
-				<Button href='http://refeicao.feak.local/#!/' sx={{ textTransform: 'none' }}>
+				<Button href='/login' sx={{ textTransform: 'none' }}>
 					<ListItem button>
 						<ListItemIcon>
-							<FoodBankIcon />
+							<ExtensionIcon />
 						</ListItemIcon>
-						<ListItemText primary={'Portal Refeição'} />
+						<ListItemText primary={'Sugest. Recebidas'} />
 					</ListItem>
 				</Button>
 
-				<Button href='http://ponto.feak.local/#!/' sx={{ textTransform: 'none' }}>
+				<Button href='/login' sx={{ textTransform: 'none' }}>
 					<ListItem button>
 						<ListItemIcon>
-							<WatchLaterIcon />
+							<ExtensionIcon />
 						</ListItemIcon>
-						<ListItemText primary={'Ocorrência de Ponto'} />
-					</ListItem>
-				</Button>
-
-				<Button href='http://acidente.feak.local/#!/' sx={{ textTransform: 'none' }}>
-					<ListItem button>
-						<ListItemIcon>
-							<NewReleasesIcon />
-						</ListItemIcon>
-						<ListItemText primary={'Ocorrência de Acidente'} />
-					</ListItem>
-				</Button>
-
-				<Button href='http://gestaopessoas.feak.local/#!/' sx={{ textTransform: 'none' }}>
-					<ListItem button>
-						<ListItemIcon>
-							<AssignmentIndIcon />
-						</ListItemIcon>
-						<ListItemText primary={'Gestão de Pessoas'} />
+						<ListItemText primary={'Acesso ADM'} />
 					</ListItem>
 				</Button>
 

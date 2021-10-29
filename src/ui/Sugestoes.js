@@ -11,7 +11,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Button from '@mui/material/Button';
+import { Button } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SendIcon from '@mui/icons-material/Send';
 import Stack from '@mui/material/Stack';
@@ -45,40 +45,47 @@ export default function () {
 
 	return (
 		<form onSubmit={hanldeSubmit}>
-			<TextField
-				margin="normal"
-				required
-				multiline
-				rows={4}
-				fullWidth
-				id="dsSugestao"
-				label="Digite sua Sugestão"
-				name="dsSugestao"
-				value={form.dsSugestao}
-				autoComplete="dsSugestao"
-				onChange={handleChange}
-				autoFocus
-			/>
-			<TextField
-				margin="normal"
-				multiline
-				fullWidth
-				name="nmPessoa"
-				label="Digite seu nome"
-				id="nmPessoa"
-				value={form.nmPessoa}
-				onChange={handleChange}
-				disabled={anonimo}
-			/>
-			<FormControlLabel
-				control={<Checkbox onChange={handleAnonimo} />}
-				label="Manter sugestão anônima"
-			/>
-			<Stack direction="row" spacing={2}>
-				<Button variant="contained" endIcon={<SendIcon />} onClick={hanldeSubmit}>
-					Send
-				</Button>
-			</Stack>
+			<Box sx={{ textAlign: 'center', maxWidth: '500px', marginLeft: 'auto', marginRight: 'auto' }}>
+				<h1>Escreva sua Sugestão:</h1>
+				<TextField
+					margin="normal"
+					required
+					multiline
+					rows={4}
+					fullWidth
+					id="dsSugestao"
+					label="Digite sua Sugestão"
+					name="dsSugestao"
+					value={form.dsSugestao}
+					autoComplete="dsSugestao"
+					onChange={handleChange}
+					autoFocus
+				/>
+				<TextField
+					margin="normal"
+					multiline
+					fullWidth
+					name="nmPessoa"
+					label="Digite seu nome"
+					id="nmPessoa"
+					value={form.nmPessoa}
+					onChange={handleChange}
+					disabled={anonimo}
+					required={!anonimo}
+				/>
+				<FormControlLabel
+					sx={{ display: 'block' }}
+					control={<Checkbox onChange={handleAnonimo} />}
+					label="Manter sugestão anônima"
+				/>
+				<button className="mdc-button mdc-button--unelevated"
+					style={{ backgroundColor: 'orange', marginTop: '10px' }}>
+					<Box sx={{ paddingRight: '10px' }}>
+						Enviar
+					</Box>
+					<SendIcon />
+				</button>
+			</Box>
 		</form>
 	)
 }

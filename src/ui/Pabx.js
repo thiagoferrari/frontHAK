@@ -33,12 +33,10 @@ const useStyles = makeStyles({
 		color: 'red',
 		marginTop: "5%"/* ,
 		textAlign: 'center' */
-
 	},
 	div: {
 		textAlign: 'center'
 	}
-
 });
 
 export default function BasicCard() {
@@ -54,7 +52,7 @@ export default function BasicCard() {
 
 	return (
 		<div className={classes.div}>
-			<h1 className={classes.titulo} >Operações do PABX</h1>
+			<h1 className={classes.titulo}>Operações do PABX</h1>
 			{dados &&
 				dados.map((obj, index) => {
 					return (
