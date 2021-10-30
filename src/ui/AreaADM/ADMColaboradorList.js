@@ -143,7 +143,8 @@ export default function () {
 			headerAlign: 'center',
 			flex: true,
 			renderCell: params => (
-				<IconButton onClick={() => window.location.href = `http://localhost:3000/Colaborador/edit/${params.id}`}>
+				<IconButton
+					onClick={() => window.location.href = `http://localhost:3000/Colaborador/edit/${params.id}`}>
 					<EditIcon />
 				</IconButton>
 			)

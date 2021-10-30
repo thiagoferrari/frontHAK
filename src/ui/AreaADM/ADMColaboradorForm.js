@@ -15,6 +15,7 @@ import { useHistory, useParams } from 'react-router-dom'
 import ConfirmDialog from '../Components/ConfirmDialog'
 import Select from '@material-ui/core/Select'
 import { InputLabel } from '@mui/material'
+import OutlinedInput from '@mui/material/OutlinedInput';
 
 
 const useStyles = makeStyles(() => ({
@@ -65,16 +66,14 @@ export default function KarangosForm() {
 
 		let { data } = await axios.get('http://localhost:3333/Setor')
 		setSetores(data)
-		console.log('data :>> ', data);
 	}, [])
 
 	async function getData(id) {
 		try {
 			let { data } = await axios.get(`http://localhost:3333/Colaborador/${id}`)
-			// Tratar Dados:
 
+			// Tratar Dados:
 			data.idSetor = data.fkSetor.id
-			data.dsSetor = data.fkSetor.dsSetor
 			delete data.fkSetor
 
 			setForm({ ...data })
@@ -87,9 +86,10 @@ export default function KarangosForm() {
 	async function saveData() {
 		try {
 			// Se o registro já existe (edição, verbo HTTP PUT)
-			/* if (params.id) await axios.put(`https://api.faustocintra.com.br/karangos/${params.id}`, karango) */
+			if (params.id)
+				await axios.put('http://localhost:3333/Colaborador', form)
 			// Registro não existe, cria um novo (verbo HTTP POST)
-			/* else await axios.post('https://api.faustocintra.com.br/karangos', karango) */
+			else await axios.post('https://api.faustocintra.com.br/karangos', karango)
 		}
 		catch (error) {
 			console.log('deu pau no salvamento :>>')
@@ -112,7 +112,7 @@ export default function KarangosForm() {
 						<TextField
 							id="dsColaborador"
 							label="Colaborador"
-							variant="filled"
+							variant="outlined"
 							value={form.dsColaborador}
 							onChange={({ target }) =>
 								setForm({
@@ -130,24 +130,28 @@ export default function KarangosForm() {
 								setForm({
 									...form, dsEmail: target.value
 								})}
-							variant="filled"
+							variant="outlined"
 							fullWidth
 							required
 						/>
 
 						<FormControl className={classes.checkbox} fullWidth>
 							<FormControlLabel
-								control={<Checkbox id="stAtivo" />}
-								label="Colaborador Ativo?"
+								control={<Checkbox id="stAtivo"
+									checked={(form.stAtivo ? true : false)}
+									onChange={e => (
+										(setForm({ ...form, stAtivo: (e.target.checked) }))
+									)}
+								/>}
+								label="Ativo?"
 							/>
 						</FormControl>
 
 						<FormControl>
-							<InputLabel>Setor</InputLabel>
-							<Select onChange={({ target }) =>
-								setForm({ ...form, dsSetor: target.value })}
-								value={setores && 2} id={form.dsSetor}
-							>
+							<InputLabel sx={{ marginLeft: 'auto', marginRight: 'auto' }}>Setor</InputLabel>
+							<Select value={Number(form.idSetor)} required
+								onChange={e => (setForm({ ...form, idSetor: e.target.value }))}
+								variant="outlined" fullWidth required>
 								{setores &&
 									setores.map(({ id, dsSetor }, i) => (
 										<MenuItem key={i} value={id}>{dsSetor}</MenuItem>
@@ -159,11 +163,11 @@ export default function KarangosForm() {
 							<Button
 								variant="contained"
 								color="secondary"
-								type="submit"
-							>
+								type="submit">
 								Enviar
 							</Button>
-							<Button variant="contained">
+							<Button variant="contained"
+								onClick={() => history.push('/Colaborador')}>
 								Voltar
 							</Button>
 						</Toolbar>
