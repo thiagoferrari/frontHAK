@@ -49,7 +49,7 @@ export default function MediaCard() {
 			'Email Contato', 'Email NF-e'])
 
 	React.useEffect(async () => {
-		let { data } = await axios.get('http://192.168.1.196:3333/Empresas')
+		let { data } = await axios.get('http://localhost:3333/Empresa')
 		setDados(data)
 	}, [])
 

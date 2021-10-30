@@ -44,7 +44,7 @@ export default function MediaCard() {
 	const [titulos, setTitulos] = React.useState([`Iterador`])
 
 	React.useEffect(async () => {
-		let { data } = await axios.get('http://192.168.1.196:3333/Politicas')
+		let { data } = await axios.get('http://192.168.1.196:3333/Politica')
 		setDados(data)
 	}, [])
 

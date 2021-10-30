@@ -1,0 +1,17 @@
+fazer botao de login > 
+	tela de cadastros:
+		colaborador - criar, editar, e ver todos
+		comunicado - criar, editar, e ver todos
+		empresa - criar, editar, e ver todos
+		pabx-instrucoes - criar, editar, e ver todos
+		politicas - criar, editar, e ver todos
+		ramais - criar, editar, e ver todos
+		setores - criar, editar, e ver todos
+
+		ver sugestoes feitas pelos funcionarios
+		login de acesso - criar, editar, e ver todos
+
+
+fazer a tela de lista de emails
+
+ajeitar o front

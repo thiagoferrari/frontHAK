@@ -46,7 +46,7 @@ export default function BasicCard() {
 	const [dados, setDados] = React.useState(null)
 
 	React.useEffect(async () => {
-		let { data } = await axios.get('http://192.168.1.196:3333/Pabxs')
+		let { data } = await axios.get('http://192.168.1.196:3333/Pabx')
 		setDados(data)
 	}, [])
 

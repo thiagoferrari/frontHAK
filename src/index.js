@@ -10,8 +10,8 @@ import Pabx from './ui/Pabx';
 
 // ADM:
 import ADMDrawer from './ui/Components/ADMDrawer';
-import ADMColaborador from  './ui/AreaADM/ADMColaborador'
-
+import ADMColaboradorList from './ui/AreaADM/ADMColaboradorList'
+import ADMColaboradorForm from './ui/AreaADM/ADMColaboradorForm'
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { Box } from '@mui/material';
@@ -42,15 +42,22 @@ ReactDOM.render(
           <Drawer corpo={<Pabx />} />
         </Route>
 
-
+        {/*ÁREA ADM*/}
         <Route exact path="/login">
           {/* <Drawer corpo={<Login />} /> */}
         </Route>
-        <Route exact path="/Colaborador">
+        <Route exact path="/ADM">
           {/* <Drawer corpo={<ADMHome />} /> */}
-          <ADMDrawer corpo={<ADMColaborador />} />
         </Route>
-
+        <Route exact path="/Colaborador">
+          <ADMDrawer corpo={<ADMColaboradorList />} />
+        </Route>
+        <Route exact path="/Colaborador/novo">
+          <ADMDrawer corpo={<ADMColaboradorForm />} />
+        </Route>
+        <Route path="/Colaborador/edit/:id">
+          <ADMDrawer corpo={<ADMColaboradorForm />} />
+        </Route>
       </Switch>
     </Box>
   </BrowserRouter>,

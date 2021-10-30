@@ -35,7 +35,7 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-export default function DadosList() {
+export default function () {
 	const classes = useStyles()
 
 	// Variáveis que conterão dados PRECISAM ser inicializadas como vetores vazios

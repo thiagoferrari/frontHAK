@@ -27,14 +27,14 @@ export default function () {
 	})
 
 	const handleAnonimo = () => {
-		const { nmPessoa } = form
+		//const { nmPessoa } = form
 		setAnonimo(!anonimo)
 		setForm({ ...form, nmPessoa: '' })
 	}
 
 	async function hanldeSubmit() {
 		event.preventDefault()
-		await axios.post('http://192.168.1.196:3333/Sugestao', form)
+		await axios.post('http://localhost:3333/Sugestao', form)
 	}
 
 	function handleChange({ target }) {
@@ -63,7 +63,6 @@ export default function () {
 				/>
 				<TextField
 					margin="normal"
-					multiline
 					fullWidth
 					name="nmPessoa"
 					label="Digite seu nome"
