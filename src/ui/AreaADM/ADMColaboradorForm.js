@@ -16,9 +16,17 @@ import ConfirmDialog from '../Components/ConfirmDialog'
 import Select from '@material-ui/core/Select'
 import { InputLabel } from '@mui/material'
 import OutlinedInput from '@mui/material/OutlinedInput';
+import {createTheme, ThemeProvider} from '@material-ui/core/styles';
 
+const theme = createTheme({
+	palette: {
+		secondary: {
+			main: '#E33E7F'
+		}
+	}
+});
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
 	form: {
 		maxWidth: '100%',
 		margin: '0 auto',
@@ -35,7 +43,8 @@ const useStyles = makeStyles(() => ({
 		marginTop: '36px',
 		width: '100%',
 		display: 'flex',
-		justifyContent: 'space-around'
+		justifyContent: 'space-around',
+		color: theme.palette.secondary.main,
 	},
 	checkbox: {
 		alignItems: 'center'
@@ -43,7 +52,7 @@ const useStyles = makeStyles(() => ({
 }))
 
 
-export default function KarangosForm() {
+export default function () {
 	const classes = useStyles()
 
 	const [title, setTitle] = useState('Cadastrar Novo Colaborador')
@@ -86,13 +95,12 @@ export default function KarangosForm() {
 	async function saveData() {
 		try {
 			// Se o registro já existe (edição, verbo HTTP PUT)
-			if (params.id)
-				await axios.put('http://localhost:3333/Colaborador', form)
+			if (params.id) await axios.put('http://localhost:3333/Colaborador', form)
 			// Registro não existe, cria um novo (verbo HTTP POST)
-			else await axios.post('https://api.faustocintra.com.br/karangos', karango)
+			else await axios.post('http://localhost:3333/Colaborador', form)
 		}
 		catch (error) {
-			console.log('deu pau no salvamento :>>')
+			console.log('deu pau no salvamento :>>' + error)
 		}
 	}
 
@@ -103,77 +111,74 @@ export default function KarangosForm() {
 
 	return (
 		<>
-			{form &&
-				<>
-					{console.log(form)}
-					<h1>{title}</h1>
-					<form className={classes.form} onSubmit={handleSubmit}>
+			{console.log(form)}
+			<h1>{title}</h1>
+			<form className={classes.form} onSubmit={handleSubmit}>
 
-						<TextField
-							id="dsColaborador"
-							label="Colaborador"
-							variant="outlined"
-							value={form.dsColaborador}
-							onChange={({ target }) =>
-								setForm({
-									...form, dsColaborador: target.value
-								})}
-							fullWidth
-							required
-						/>
+				<TextField
+					id="dsColaborador"
+					label="Colaborador"
+					variant="outlined"
+					value={form.dsColaborador}
+					onChange={({ target }) =>
+						setForm({
+							...form, dsColaborador: target.value
+						})}
+					fullWidth
+					required
+				/>
 
-						<TextField
-							id="dsEmail"
-							label="Email"
-							value={form.dsEmail}
-							onChange={({ target }) =>
-								setForm({
-									...form, dsEmail: target.value
-								})}
-							variant="outlined"
-							fullWidth
-							required
-						/>
+				<TextField
+					id="dsEmail"
+					label="Email"
+					type="email"
+					value={form.dsEmail}
+					onChange={({ target }) =>
+						setForm({
+							...form, dsEmail: target.value
+						})}
+					variant="outlined"
+					fullWidth
+					required
+				/>
 
-						<FormControl className={classes.checkbox} fullWidth>
-							<FormControlLabel
-								control={<Checkbox id="stAtivo"
-									checked={(form.stAtivo ? true : false)}
-									onChange={e => (
-										(setForm({ ...form, stAtivo: (e.target.checked) }))
-									)}
-								/>}
-								label="Ativo?"
-							/>
-						</FormControl>
+				<FormControl className={classes.checkbox} fullWidth>
+					<FormControlLabel
+						control={<Checkbox id="stAtivo"
+							checked={(form.stAtivo ? true : false)}
+							onChange={e => (
+								(setForm({ ...form, stAtivo: (e.target.checked) }))
+							)}
+						/>}
+						label="Ativo?"
+					/>
+				</FormControl>
 
-						<FormControl>
-							<InputLabel sx={{ marginLeft: 'auto', marginRight: 'auto' }}>Setor</InputLabel>
-							<Select value={Number(form.idSetor)} required
-								onChange={e => (setForm({ ...form, idSetor: e.target.value }))}
-								variant="outlined" fullWidth required>
-								{setores &&
-									setores.map(({ id, dsSetor }, i) => (
-										<MenuItem key={i} value={id}>{dsSetor}</MenuItem>
-									))}
-							</Select>
-						</FormControl>
+				<FormControl>
+					<InputLabel sx={{ marginLeft: 'auto', marginRight: 'auto' }}>Setor</InputLabel>
+					<Select value={Number(form.idSetor)} required
+						onChange={e => (setForm({ ...form, idSetor: e.target.value }))}
+						variant="outlined" fullWidth required>
+						{setores &&
+							setores.map(({ id, dsSetor }, i) => (
+								<MenuItem key={i} value={id}>{dsSetor}</MenuItem>
+							))}
+					</Select>
+				</FormControl>
 
-						<Toolbar className={classes.toolbar}>
-							<Button
-								variant="contained"
-								color="secondary"
-								type="submit">
-								Enviar
-							</Button>
-							<Button variant="contained"
-								onClick={() => history.push('/Colaborador')}>
-								Voltar
-							</Button>
-						</Toolbar>
-					</form>
-				</>
-			}
+				<Toolbar className={classes.toolbar}>
+					<Button
+						variant="contained"
+						color="secondary"
+						type="submit">
+						Enviar
+					</Button>
+					<Button variant="contained"
+						onClick={() => history.push('/Colaborador')}>
+						Voltar
+					</Button>
+				</Toolbar>
+			</form>
 		</>
 	)
 }

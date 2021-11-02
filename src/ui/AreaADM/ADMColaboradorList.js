@@ -73,14 +73,26 @@ export default function () {
 		setGridLoading(false)
 	}
 
+	const [snackState, setSnackState] = useState({
+		open: false,
+		severity: 'success',
+		message: 'Cliente salvo com sucesso'
+	})
+
+	const [btnSendState, setBtnSendState] = useState({
+		disabled: false,
+		label: 'Enviar'
+	})
+
 	async function deleteItem() {
 		try {
-			await axios.delete(`https://api.faustocintra.com.br/dados/${deletable}`)
+			await axios.delete(`http://localhost:3333/Colaborador/${deletable}`)
 			getData()     // Atualiza os dados da tabela
 			setSbSeverity('success')
 			setSbMessage('Exclusão efetuada com sucesso.')
 		}
 		catch (error) {
+			console.error(error)
 			setSbSeverity('error')
 			setSbMessage('ERRO: ' + error.message)
 		}
@@ -116,7 +128,7 @@ export default function () {
 			headerName: 'Ativo?',
 			flex: true,
 			renderCell: params => (
-				<Checkbox checked={params.value === "S"} readOnly disabled />
+				<Checkbox checked={params.value === true} disabled />
 			)
 		},
 		{
@@ -166,7 +178,7 @@ export default function () {
 	return (
 		<>
 			<ConfirmDialog isOpen={dialogOpen} onClose={handleDialogClose}>
-				Deseja realmente excluir este karango?
+				Deseja realmente excluir este Colaborador?
 			</ConfirmDialog>
 
 			<Snackbar open={sbOpen} autoHideDuration={6000} onClose={handleSbClose}>
@@ -177,8 +189,8 @@ export default function () {
 
 			<h1 onClick={() => getData()}>Listagem de Colaboradores</h1>
 			<Toolbar className={classes.toolbar}>
-				<Button color="secondary" variant="contained" size="large"
-					startIcon={<AddBoxIcon />} onClick={() => history.push('/new')}>
+				<Button color="secondary" variant="contained" size="large" startIcon={<AddBoxIcon />}
+					onClick={() => window.location.href = `http://localhost:3000/Colaborador/novo`}>
 					Novo Colaborador
 				</Button>
 			</Toolbar>
