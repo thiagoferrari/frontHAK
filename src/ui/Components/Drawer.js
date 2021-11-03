@@ -16,6 +16,8 @@ import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import MenuIcon from "@material-ui/icons/Menu";
+import Link from "@material-ui/core/Link";
+import { useHistory } from "react-router-dom";
 
 import logo from '../../img/logo.png'
 
@@ -58,7 +60,8 @@ const useStyles = makeStyles(theme => ({
 		marginRight: theme.spacing(2),
 		[theme.breakpoints.up("md")]: {
 			display: "none"
-		}
+		},
+		color: 'white'
 	},
 	toolbar: {
 		...theme.mixins.toolbar,
@@ -79,9 +82,11 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function (props) {
+	const history = useHistory();
 	const classes = useStyles();
 	const theme = useTheme();
 	const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
+	const [logged, setLogged] = React.useState(true);
 
 	const [open, setOpen] = React.useState(false);
 
@@ -129,123 +134,208 @@ export default function (props) {
 
 				<Divider />
 
-				<Button href='/' sx={{ textTransform: 'none' }}>
+				<Link onClick={() => history.push('/')}>
 					<ListItem button>
 						<ListItemIcon>
 							<HomeIcon />
 						</ListItemIcon>
 						<ListItemText primary={'Página Inicial'} />
 					</ListItem>
-				</Button>
+				</Link>
 
-				<Button href='/sugestoes' sx={{ textTransform: 'none' }}>
+				<Link onClick={() => history.push('/app-sugestoes')}>
 					<ListItem button>
 						<ListItemIcon>
 							<LightbulbIcon />
 						</ListItemIcon>
 						<ListItemText primary={'Sugestões'} />
 					</ListItem>
-				</Button>
+				</Link>
 
 				<Divider />
 
-				<Button href='/empresa' sx={{ textTransform: 'none' }}>
+				<Link onClick={() => history.push('/app-empresas')}>
 					<ListItem button>
 						<ListItemIcon>
 							<InfoIcon />
 						</ListItemIcon>
 						<ListItemText primary={'Dados da Empresa'} />
 					</ListItem>
-				</Button>
+				</Link>
 
-				<Button href='/ramais' sx={{ textTransform: 'none' }}>
+				<Link onClick={() => history.push('/app-ramais')}>
 					<ListItem button>
 						<ListItemIcon>
 							<AddIcCallIcon />
 						</ListItemIcon>
 						<ListItemText primary={'Lista de Ramais'} />
 					</ListItem>
-				</Button>
+				</Link>
 
-				<Button href='/emails' sx={{ textTransform: 'none' }}>
+				<Link onClick={() => history.push('/app-emails')}>
 					<ListItem button>
 						<ListItemIcon>
 							<AlternateEmailIcon />
 						</ListItemIcon>
 						<ListItemText primary={'Lista de E-mails'} />
 					</ListItem>
-				</Button>
+				</Link>
 
-				<Button href='/politicas' sx={{ textTransform: 'none' }}>
+				<Link onClick={() => history.push('/app-politicas')}>
 					<ListItem button>
 						<ListItemIcon>
 							<LocalPoliceIcon />
 						</ListItemIcon>
 						<ListItemText primary={'Políticas Internas'} />
 					</ListItem>
-				</Button>
+				</Link>
 
-				<Button href='/pabx' sx={{ textTransform: 'none' }}>
+				<Link onClick={() => history.push('/app-pabx')}>
 					<ListItem button>
 						<ListItemIcon>
 							<DialerSipIcon />
 						</ListItemIcon>
 						<ListItemText primary={'Operações do PABX'} />
 					</ListItem>
-				</Button>
+				</Link>
 
 				<Divider />
 
-				<Button href='http://refeicao.feak.local/#!/' sx={{ textTransform: 'none' }}>
+				<Link href='http://refeicao.feak.local/#!/'>
 					<ListItem button>
 						<ListItemIcon>
 							<FoodBankIcon />
 						</ListItemIcon>
 						<ListItemText primary={'Portal Refeição'} />
 					</ListItem>
-				</Button>
+				</Link>
 
-				<Button href='http://ponto.feak.local/#!/' sx={{ textTransform: 'none' }}>
+				<Link href='http://ponto.feak.local/#!/'>
 					<ListItem button>
 						<ListItemIcon>
 							<WatchLaterIcon />
 						</ListItemIcon>
 						<ListItemText primary={'Ocorrência de Ponto'} />
 					</ListItem>
-				</Button>
+				</Link>
 
-				<Button href='http://acidente.feak.local/#!/' sx={{ textTransform: 'none' }}>
+				<Link href='http://acidente.feak.local/#!/'>
 					<ListItem button>
 						<ListItemIcon>
 							<NewReleasesIcon />
 						</ListItemIcon>
 						<ListItemText primary={'Ocorrência de Acidente'} />
 					</ListItem>
-				</Button>
+				</Link>
 
-				<Button href='http://gestaopessoas.feak.local/#!/' sx={{ textTransform: 'none' }}>
+				<Link href='http://gestaopessoas.feak.local/#!/'>
 					<ListItem button>
 						<ListItemIcon>
 							<AssignmentIndIcon />
 						</ListItemIcon>
 						<ListItemText primary={'Gestão de Pessoas'} />
 					</ListItem>
-				</Button>
+				</Link>
 
 				<Divider />
 
-				<Button href='/login' sx={{ textTransform: 'none' }}>
+				<Link onClick={() => history.push('/app-login')}>
 					<ListItem button>
 						<ListItemIcon>
 							<ExtensionIcon />
 						</ListItemIcon>
 						<ListItemText primary={'Área Administrativa'} />
 					</ListItem>
-				</Button>
+				</Link>
+
+				{logged &&
+					<>
+						<Link onClick={() => history.push('/Colaborador')}>
+							<ListItem button>
+								<ListItemIcon>
+									<HomeIcon />
+								</ListItemIcon>
+								<ListItemText primary={'Colaboradores'} />
+							</ListItem>
+						</Link>
+
+						<Link onClick={() => history.push('/Comunicado')}>
+							<ListItem button>
+								<ListItemIcon>
+									<LightbulbIcon />
+								</ListItemIcon>
+								<ListItemText primary={'Comunicados'} />
+							</ListItem>
+						</Link>
+
+						<Link onClick={() => history.push('/Empresa')}>
+							<ListItem button>
+								<ListItemIcon>
+									<InfoIcon />
+								</ListItemIcon>
+								<ListItemText primary={'Empresas'} />
+							</ListItem>
+						</Link>
+
+						<Link onClick={() => history.push('/Setor')}>
+							<ListItem button>
+								<ListItemIcon>
+									<AddIcCallIcon />
+								</ListItemIcon>
+								<ListItemText primary={'Setores'} />
+							</ListItem>
+						</Link>
+
+						<Link onClick={() => history.push('/Politica')}>
+							<ListItem button>
+								<ListItemIcon>
+									<AlternateEmailIcon />
+								</ListItemIcon>
+								<ListItemText primary={'Políticas'} />
+							</ListItem>
+						</Link>
+
+						<Link onClick={() => history.push('/Ramal')}>
+							<ListItem button>
+								<ListItemIcon>
+									<LocalPoliceIcon />
+								</ListItemIcon>
+								<ListItemText primary={'Ramais'} />
+							</ListItem>
+						</Link>
+
+						<Link onClick={() => history.push('/Pabx')}>
+							<ListItem button>
+								<ListItemIcon>
+									<DialerSipIcon />
+								</ListItemIcon>
+								<ListItemText primary={'Instruções PABX'} />
+							</ListItem>
+						</Link>
+
+						<Link onClick={() => history.push('/Sugestao')}>
+							<ListItem button>
+								<ListItemIcon>
+									<ExtensionIcon />
+								</ListItemIcon>
+								<ListItemText primary={'Sugest. Recebidas'} />
+							</ListItem>
+						</Link>
+
+						<Link onClick={() => history.push('/AcessoADM')} >
+							<ListItem button>
+								<ListItemIcon>
+									<ExtensionIcon />
+								</ListItemIcon>
+								<ListItemText primary={'Acesso ADM'} />
+							</ListItem>
+						</Link>
+					</>
+				}
 
 			</Drawer>
 			<Box sx={{ flexGrow: 1, p: 3, marginY: '5%' }}>
-				{props.corpo}
+				{props.children}
 			</Box>
 		</div>
 	);

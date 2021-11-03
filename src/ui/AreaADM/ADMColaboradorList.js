@@ -35,7 +35,7 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-export default function () {
+export default function ADMColaboradorList() {
 	const classes = useStyles()
 
 	// Variáveis que conterão dados PRECISAM ser inicializadas como vetores vazios
@@ -87,7 +87,6 @@ export default function () {
 	async function deleteItem() {
 		try {
 			await axios.delete(`http://localhost:3333/Colaborador/${deletable}`)
-			getData()     // Atualiza os dados da tabela
 			setSbSeverity('success')
 			setSbMessage('Exclusão efetuada com sucesso.')
 		}
@@ -97,6 +96,7 @@ export default function () {
 			setSbMessage('ERRO: ' + error.message)
 		}
 		setSbOpen(true)   // Exibe a snackbar
+		getData()     // Atualiza os dados da tabela
 	}
 
 	function handleDialogClose(result) {

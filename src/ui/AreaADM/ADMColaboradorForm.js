@@ -16,21 +16,13 @@ import ConfirmDialog from '../Components/ConfirmDialog'
 import Select from '@material-ui/core/Select'
 import { InputLabel } from '@mui/material'
 import OutlinedInput from '@mui/material/OutlinedInput';
-import {createTheme, ThemeProvider} from '@material-ui/core/styles';
-
-const theme = createTheme({
-	palette: {
-		secondary: {
-			main: '#E33E7F'
-		}
-	}
-});
+import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
 	form: {
 		maxWidth: '100%',
-		margin: '0 auto',
-		display: 'flex',
+		display: 'inline-block',
+		alignItems: 'center',
 		justifyContent: 'space-around',
 		flexWrap: 'wrap',
 		'& .MuiFormControl-root': {
@@ -43,19 +35,37 @@ const useStyles = makeStyles((theme) => ({
 		marginTop: '36px',
 		width: '100%',
 		display: 'flex',
+		alignItems: 'center',
 		justifyContent: 'space-around',
 		color: theme.palette.secondary.main,
 	},
 	checkbox: {
-		alignItems: 'center'
+		alignItems: 'center',
+		display: 'inline-block',
+		justifyContent: 'space-around',
+		flexWrap: 'wrap',
 	}
 }))
 
 
-export default function () {
+export default function ADMColaboradorForm() {
 	const classes = useStyles()
 
 	const [title, setTitle] = useState('Cadastrar Novo Colaborador')
+
+	const [dialogOpen, setDialogOpen] = useState(false) // O diálogo de confirmação de voltar está aberto?
+
+	// Estados de Snackbar:
+	const [sbOpen, setSbOpen] = useState(false)
+	const [sbSeverity, setSbSeverity] = useState('')
+	const [sbMessage, setSbMessage] = useState('')
+
+	function handleDialogClose(result) {
+		setDialogOpen(false)
+
+		// Se o usuário concordou em voltar
+		if (result) history.push('/Colaborador')
+	}
 
 	const history = useHistory()
 	const params = useParams()
@@ -77,6 +87,10 @@ export default function () {
 		setSetores(data)
 	}, [])
 
+	/* function handleSbClose() {
+		setSbOpen(false)    // Fecha a snackbar
+	} */
+
 	async function getData(id) {
 		try {
 			let { data } = await axios.get(`http://localhost:3333/Colaborador/${id}`)
@@ -88,7 +102,10 @@ export default function () {
 			setForm({ ...data })
 		}
 		catch (error) {
-			console.log('deu pau no getData :>>')
+			console.error(error)
+			setSbOpen(true)
+			setSbSeverity('error')
+			setSbMessage('ERRO: ' + error.message)
 		}
 	}
 
@@ -98,9 +115,17 @@ export default function () {
 			if (params.id) await axios.put('http://localhost:3333/Colaborador', form)
 			// Registro não existe, cria um novo (verbo HTTP POST)
 			else await axios.post('http://localhost:3333/Colaborador', form)
+
+			setSbOpen(true)
+			setSbSeverity('success')
+			setSbMessage('Dados enviados com sucesso.')
+			setTimeout(() => { history.push('/Colaborador') }, 2000)
 		}
 		catch (error) {
-			console.log('deu pau no salvamento :>>' + error)
+			console.error(error)
+			setSbOpen(true)
+			setSbSeverity('error')
+			setSbMessage('ERRO: ' + error.message)
 		}
 	}
 
@@ -109,37 +134,55 @@ export default function () {
 		saveData()
 	}
 
+	function handleChange({ target }) {
+		const { id, value } = target
+		setForm({ ...form, [id]: value })
+		/* esse [id] recebe o id do input */
+	}
+
 	return (
-		<>
-			{console.log(form)}
+		<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+
+			<ConfirmDialog isOpen={dialogOpen} onClose={handleDialogClose} color="secondary">
+				Podem haver dados não salvos. Tem certeza que deseja sair?
+			</ConfirmDialog>
+
+			<Snackbar open={sbOpen} autoHideDuration={6000} color="secondary">
+				<MuiAlert elevation={6} variant="filled" severity={sbSeverity}>
+					{sbMessage}
+				</MuiAlert>
+			</Snackbar>
+
 			<h1>{title}</h1>
 			<form className={classes.form} onSubmit={handleSubmit}>
-
 				<TextField
-					id="dsColaborador"
-					label="Colaborador"
-					variant="outlined"
-					value={form.dsColaborador}
-					onChange={({ target }) =>
-						setForm({
-							...form, dsColaborador: target.value
-						})}
-					fullWidth
-					required
+					id="dsColaborador" InputLabelProps={{ shrink: true }}
+					label="Colaborador" variant="outlined"
+					color="secondary" value={form.dsColaborador}
+					onChange={handleChange}
+					fullWidth required
 				/>
 
+				<div>
+					<FormControl className={classes.checkbox}>
+						<InputLabel>Setor</InputLabel>
+						<Select value={Number(form.idSetor)} required color="secondary"
+							onChange={e => (setForm({ ...form, idSetor: e.target.value }))}
+							variant="outlined" fullWidth required>
+							{setores &&
+								setores.map(({ id, dsSetor }, i) => (
+									<MenuItem key={i} value={id}>{dsSetor}</MenuItem>
+								))}
+						</Select>
+					</FormControl>
+				</div>
+
 				<TextField
-					id="dsEmail"
-					label="Email"
-					type="email"
-					value={form.dsEmail}
-					onChange={({ target }) =>
-						setForm({
-							...form, dsEmail: target.value
-						})}
-					variant="outlined"
-					fullWidth
-					required
+					id="dsEmail" InputLabelProps={{ shrink: true }}
+					label="Email" type="email" color="secondary"
+					value={form.dsEmail} variant="outlined"
+					onChange={handleChange}
+					fullWidth required
 				/>
 
 				<FormControl className={classes.checkbox} fullWidth>
@@ -150,35 +193,21 @@ export default function () {
 								(setForm({ ...form, stAtivo: (e.target.checked) }))
 							)}
 						/>}
-						label="Ativo?"
+						label="Colaborador Ativo?"
 					/>
 				</FormControl>
 
-				<FormControl>
-					<InputLabel sx={{ marginLeft: 'auto', marginRight: 'auto' }}>Setor</InputLabel>
-					<Select value={Number(form.idSetor)} required
-						onChange={e => (setForm({ ...form, idSetor: e.target.value }))}
-						variant="outlined" fullWidth required>
-						{setores &&
-							setores.map(({ id, dsSetor }, i) => (
-								<MenuItem key={i} value={id}>{dsSetor}</MenuItem>
-							))}
-					</Select>
-				</FormControl>
-
 				<Toolbar className={classes.toolbar}>
-					<Button
-						variant="contained"
-						color="secondary"
-						type="submit">
+					<Button variant="contained" color="secondary" type="submit">
 						Enviar
 					</Button>
+
 					<Button variant="contained"
-						onClick={() => history.push('/Colaborador')}>
+						onClick={() => setDialogOpen(true)}>
 						Voltar
 					</Button>
 				</Toolbar>
 			</form>
-		</>
+		</div >
 	)
 }

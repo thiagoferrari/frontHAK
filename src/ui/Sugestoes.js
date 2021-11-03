@@ -11,17 +11,39 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Button } from '@mui/material';
+import Toolbar from '@material-ui/core/Toolbar'
+import Button from '@material-ui/core/Button'
 import DeleteIcon from '@mui/icons-material/Delete';
 import SendIcon from '@mui/icons-material/Send';
 import Stack from '@mui/material/Stack';
+import { makeStyles } from '@material-ui/core/styles'
+import cyan from '@material-ui/core/colors/cyan'
 
 import axios from 'axios';
 
+const useStyles = makeStyles((theme) => ({
+	toolbar: {
+		marginTop: '36px',
+		width: '100%',
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'space-around',
+		color: cyan[500],
+	},
+	box: {
+		textAlign: 'center',
+		maxWidth: '500px',
+		marginLeft: 'auto',
+		marginRight: 'auto'
+	}
+}))
+
 export default function () {
+
+	const classes = useStyles()
 	const [anonimo, setAnonimo] = React.useState(false)
 	const [form, setForm] = React.useState({
-		stAtivo: "S",
+		stAtivo: true,
 		nmPessoa: '',
 		dsSugestao: ''
 	})
@@ -44,32 +66,21 @@ export default function () {
 	}
 
 	return (
-		<form onSubmit={hanldeSubmit}>
-			<Box sx={{ textAlign: 'center', maxWidth: '500px', marginLeft: 'auto', marginRight: 'auto' }}>
+		< form onSubmit={hanldeSubmit} >
+			{console.log(form)}
+			<Box className={classes.box}>
 				<h1>Escreva sua Sugestão:</h1>
-				<TextField
-					margin="normal"
-					required
-					multiline
-					rows={4}
-					fullWidth
-					id="dsSugestao"
-					label="Digite sua Sugestão"
-					name="dsSugestao"
-					value={form.dsSugestao}
-					autoComplete="dsSugestao"
-					onChange={handleChange}
-					autoFocus
+				<TextField autoFocus margin="normal"
+					required label="Digite sua Sugestão"
+					rows={4} onChange={handleChange}
+					id="dsSugestao" multiline
+					name="dsSugestao" value={form.dsSugestao}
+					autoComplete="dsSugestao" fullWidth
 				/>
-				<TextField
-					margin="normal"
-					fullWidth
-					name="nmPessoa"
-					label="Digite seu nome"
-					id="nmPessoa"
-					value={form.nmPessoa}
-					onChange={handleChange}
-					disabled={anonimo}
+				<TextField margin="normal" fullWidth
+					name="nmPessoa" label="Digite seu nome"
+					id="nmPessoa" value={form.nmPessoa}
+					onChange={handleChange} disabled={anonimo}
 					required={!anonimo}
 				/>
 				<FormControlLabel
@@ -77,14 +88,12 @@ export default function () {
 					control={<Checkbox onChange={handleAnonimo} />}
 					label="Manter sugestão anônima"
 				/>
-				<button className="mdc-button mdc-button--unelevated"
-					style={{ backgroundColor: 'orange', marginTop: '10px' }}>
-					<Box sx={{ paddingRight: '10px' }}>
-						Enviar
-					</Box>
-					<SendIcon />
-				</button>
+				<Toolbar className={classes.toolbar}>
+					<Button variant="contained" type="submit">
+						Enviar<SendIcon sx={{ marginLeft: '10px' }} />
+					</Button>
+				</Toolbar>
 			</Box>
-		</form>
+		</form >
 	)
 }
