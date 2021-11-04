@@ -190,6 +190,7 @@ export default function ADMColaboradorList() {
 			<h1 onClick={() => getData()}>Listagem de Colaboradores</h1>
 			<Toolbar className={classes.toolbar}>
 				<Button color="secondary" variant="contained" size="large" startIcon={<AddBoxIcon />}
+				/* onClick={() => history.push('/app-login')} */
 					onClick={() => window.location.href = `http://localhost:3000/Colaborador/novo`}>
 					Novo Colaborador
 				</Button>

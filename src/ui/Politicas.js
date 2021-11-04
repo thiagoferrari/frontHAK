@@ -18,7 +18,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { LensTwoTone } from '@material-ui/icons';
 import { LegendToggleRounded } from '@mui/icons-material';
 
-
 import lgpd from '../img/lgpd.jpg';
 import etica from '../img/etica.png';
 import { makeStyles } from '@mui/styles';

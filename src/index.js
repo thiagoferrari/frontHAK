@@ -34,8 +34,8 @@ import ADMPabxList from './ui/AreaADM/ADMPabxList'
 import ADMPabxForm from './ui/AreaADM/ADMPabxForm'
 import ADMSugestaoList from './ui/AreaADM/ADMSugestaoList'
 import ADMSugestaoForm from './ui/AreaADM/ADMSugestaoForm'
-import ADMAcessoADMList from './ui/AreaADM/ADMAcessoADMList'
-import ADMAcessoADMForm from './ui/AreaADM/ADMAcessoADMForm'
+import ADMAcessoList from './ui/AreaADM/ADMAcessoList'
+import ADMAcessoForm from './ui/AreaADM/ADMAcessoForm'
 
 
 const theme = createTheme({
@@ -93,10 +93,10 @@ const Components = () => {
               <Route exact path="/Colaborador">
                 <ADMColaboradorList />
               </Route>
-              <Route exact path="/Colaborador/novo">
+              <Route path="/Colaborador/novo">
                 <ADMColaboradorForm />
               </Route>
-              <Route path="/Colaborador/edit/:id">
+              <Route exact path="/Colaborador/edit/:id">
                 <ADMColaboradorForm />
               </Route>
               <Route exact path="/Comunicado">
@@ -105,7 +105,7 @@ const Components = () => {
               <Route exact path="/Comunicado/novo">
                 <ADMComunicadoForm />
               </Route>
-              <Route path="/Comunicado/edit/:id">
+              <Route exact path="/Comunicado/edit/:id">
                 <ADMComunicadoForm />
               </Route>
               <Route exact path="/Empresa">
@@ -114,7 +114,7 @@ const Components = () => {
               <Route exact path="/Empresa/novo">
                 <ADMEmpresaForm />
               </Route>
-              <Route path="/Empresa/edit/:id">
+              <Route exact path="/Empresa/edit/:id">
                 <ADMEmpresaForm />
               </Route>
               <Route exact path="/Setor">
@@ -123,7 +123,7 @@ const Components = () => {
               <Route exact path="/Setor/novo">
                 <ADMSetorForm />
               </Route>
-              <Route path="/Setor/edit/:id">
+              <Route exact path="/Setor/edit/:id">
                 <ADMSetorForm />
               </Route>
               <Route exact path="/Politica">
@@ -132,7 +132,7 @@ const Components = () => {
               <Route exact path="/Politica/novo">
                 <ADMPoliticaForm />
               </Route>
-              <Route path="/Politica/edit/:id">
+              <Route exact path="/Politica/edit/:id">
                 <ADMPoliticaForm />
               </Route>
               <Route exact path="/Ramal">
@@ -141,7 +141,7 @@ const Components = () => {
               <Route exact path="/Ramal/novo">
                 <ADMRamalForm />
               </Route>
-              <Route path="/Ramal/edit/:id">
+              <Route exact path="/Ramal/edit/:id">
                 <ADMRamalForm />
               </Route>
               <Route exact path="/Pabx">
@@ -150,20 +150,20 @@ const Components = () => {
               <Route exact path="/Pabx/novo">
                 <ADMPabxForm />
               </Route>
-              <Route path="/Pabx/edit/:id">
+              <Route exact path="/Pabx/edit/:id">
                 <ADMPabxForm />
               </Route>
               <Route exact path="/Sugestao">
                 <ADMSugestaoList />
               </Route>
               <Route exact path="/AcessoADM">
-                <ADMAcessoADMList />
+                <ADMAcessoList />
               </Route>
               <Route exact path="/AcessoADM/novo">
-                <ADMAcessoADMForm />
+                <ADMAcessoForm />
               </Route>
-              <Route path="/AcessoADM/edit/:id">
-                <ADMAcessoADMForm />
+              <Route exact path="/AcessoADM/edit/:id">
+                <ADMAcessoForm />
               </Route>
             </Drawer>
           </Switch>
