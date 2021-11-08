@@ -10,11 +10,11 @@ import EditIcon from '@material-ui/icons/Edit';
 import Toolbar from '@material-ui/core/Toolbar'
 import Button from '@material-ui/core/Button'
 import AddBoxIcon from '@material-ui/icons/AddBox';
-import { useHistory } from 'react-router-dom'
 import ConfirmDialog from '../Components/ConfirmDialog'
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { DataGrid } from '@material-ui/data-grid'
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
 	table: {
@@ -46,8 +46,6 @@ export default function ADMColaboradorList() {
 	const [sbSeverity, setSbSeverity] = useState('success')
 	const [sbMessage, setSbMessage] = useState('Exclusão realizada com sucesso.')
 	const [gridLoading, setGridLoading] = useState(false)
-
-	const history = useHistory()
 
 	useEffect(() => {
 		setTimeout(() => getData(), 100)
@@ -156,9 +154,11 @@ export default function ADMColaboradorList() {
 			flex: true,
 			renderCell: params => (
 				<IconButton
+					/* onMouseDown={() => history.push(`/Colaborador/edit/${params.id}`)} */
+					/* onMouseDown={() => navigate(`/Colaborador/edit/${params.id}`)} */
 					onClick={() => window.location.href = `http://localhost:3000/Colaborador/edit/${params.id}`}>
 					<EditIcon />
-				</IconButton>
+				</IconButton >
 			)
 		},
 		{
@@ -187,13 +187,17 @@ export default function ADMColaboradorList() {
 				</MuiAlert>
 			</Snackbar>
 
-			<h1 onClick={() => getData()}>Listagem de Colaboradores</h1>
+			<h1 style={{ textAlign: 'center' }}>Listagem de Colaboradores</h1>
 			<Toolbar className={classes.toolbar}>
-				<Button color="secondary" variant="contained" size="large" startIcon={<AddBoxIcon />}
-				/* onClick={() => history.push('/app-login')} */
-					onClick={() => window.location.href = `http://localhost:3000/Colaborador/novo`}>
-					Novo Colaborador
-				</Button>
+				<Link to="/Colaborador/novo">
+					<Button color="secondary" variant="contained"
+						size="large" startIcon={<AddBoxIcon />}
+						/* onClick={() => history.push('/Colaborador/novo')} */
+						/* onClick={() => navigate('/Colaborador/novo')} */
+						onClick={() => window.location.href = `http://localhost:3000/Colaborador/novo`}>
+						Novo Colaborador
+					</Button>
+				</Link>
 			</Toolbar>
 			<Paper elevation={4}>
 				<DataGrid className={classes.dataGrid} rows={dados}

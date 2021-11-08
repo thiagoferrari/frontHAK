@@ -115,16 +115,10 @@ export default function (props) {
 					</div>
 				</Toolbar>
 			</AppBar>
-			<Drawer
-				className={classes.drawer}
+			<Drawer className={classes.drawer} open={open}
 				variant={isMdUp ? "permanent" : "temporary"}
-				classes={{
-					paper: classes.drawerPaper
-				}}
-				anchor="left"
-				open={open}
-				onClose={toggleDrawer}
-			>
+				classes={{ paper: classes.drawerPaper }}
+				anchor="left" onClose={toggleDrawer}>
 				<div className={classes.toolbar} />
 
 				<Divider />
@@ -216,7 +210,7 @@ export default function (props) {
 
 			</Drawer>
 			<Box sx={{ flexGrow: 1, p: 3, marginY: '5%' }}>
-				{props.corpo}
+				{props.children}
 			</Box>
 		</div>
 	);

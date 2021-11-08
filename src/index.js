@@ -1,20 +1,12 @@
-import * as React from 'react';
-import { render } from 'react-dom';
-
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import { Box } from '@mui/material';
-
-import { MuiThemeProvider, createTheme, makeStyles } from '@material-ui/core/styles';
-import cyan from '@material-ui/core/colors/cyan'
-import orange from '@material-ui/core/colors/red'
-
-/* páginas: */
-import Drawer from './ui/Components/Drawer'
-import Home from './ui/Home'
-import Empresa from './ui/Empresa'
-import Sugestoes from './ui/Sugestoes'
-import Politicas from './ui/Politicas'
-import Pabx from './ui/Pabx'
+import Drawer from './ui/Components/Drawer';
+import Home from './ui/Home';
+import Empresa from './ui/Empresa';
+import Sugestoes from './ui/Sugestoes';
+import Politicas from './ui/Politicas';
+import Pabx from './ui/Pabx';
+import Ramais from './ui/Ramais';
+import Emails from './ui/Emails';
+import Login from './ui/Login';
 
 // ADM:
 import ADMDrawer from './ui/Components/ADMDrawer';
@@ -37,12 +29,22 @@ import ADMSugestaoForm from './ui/AreaADM/ADMSugestaoForm'
 import ADMAcessoList from './ui/AreaADM/ADMAcessoList'
 import ADMAcessoForm from './ui/AreaADM/ADMAcessoForm'
 
+import * as React from 'react';
+import { render } from 'react-dom';
+
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { Box } from '@mui/material';
+
+import { MuiThemeProvider, createTheme, makeStyles } from '@material-ui/core/styles';
+import cyan from '@material-ui/core/colors/cyan'
+import orange from '@material-ui/core/colors/red'
+
 
 const theme = createTheme({
   palette: {
     /* type: 'dark', */
     primary: {
-      main: orange[300],
+      main: orange[500],
     },
     secondary: {
       main: cyan[500],
@@ -50,127 +52,61 @@ const theme = createTheme({
   },
 });
 
-const Components = () => {
 
-  const [logged, setLogged] = React.useState(true);
+render(
+  <BrowserRouter>
+    <MuiThemeProvider theme={theme}>
+      <Box id="routed" >
+        <Drawer>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/app-sugestoes" component={Sugestoes} />
+          <Route exact path="/app-empresas" component={Empresa} />
+          <Route exact path="/app-ramais" component={Ramais} />
+          <Route exact path="/app-emails" component={Emails} />
+          <Route exact path="/app-politicas" component={Politicas} />
+          <Route exact path="/app-pabx" component={Pabx} />
+          <Route exact path="/app-login" component={Login} />
 
-  return (
-    <BrowserRouter>
-      <MuiThemeProvider theme={theme}>
-        <Box id="routed" >
-          <Switch>
-            <Drawer>
-              <Route exact path="/">
-                <Home />
-              </Route>
-              <Route exact path="/app-sugestoes">
-                <Sugestoes />
-              </Route>
-              <Route exact path="/app-empresas">
-                <Empresa />
-              </Route>
-              {/* <Route exact path="/app-ramais">
-              <Ramais />
-            </Route> */}
-              {/* <Route exact path="/app-emails">
-              <Emails />
-            </Route> */}
-              <Route exact path="/app-politicas">
-                <Politicas />
-              </Route>
-              <Route exact path="/app-pabx">
-                <Pabx />
-              </Route>
-              <Route exact path="/app-login">
-                {/* <Drawer corpo={<Login /> */}
-              </Route>
+          {/* ADM: */}
+          <Route exact path="/ADM" /* component={ADMHome} */ />
 
+          {/* <Route exact path="/Colaborador" component={ADMColaboradorList} />
+          <Route path="/Colaborador/novo" component={ADMColaboradorForm} /> */}
+          <Route path="/Colaborador/:id" component={ADMColaboradorForm} />
 
-              {/* ADM: */}
-              <Route exact path="/ADM">
-                {/* <Drawer corpo={<ADMHome /> */}
-              </Route>
-              <Route exact path="/Colaborador">
-                <ADMColaboradorList />
-              </Route>
-              <Route path="/Colaborador/novo">
-                <ADMColaboradorForm />
-              </Route>
-              <Route exact path="/Colaborador/edit/:id">
-                <ADMColaboradorForm />
-              </Route>
-              <Route exact path="/Comunicado">
-                <ADMComunicadoList />
-              </Route>
-              <Route exact path="/Comunicado/novo">
-                <ADMComunicadoForm />
-              </Route>
-              <Route exact path="/Comunicado/edit/:id">
-                <ADMComunicadoForm />
-              </Route>
-              <Route exact path="/Empresa">
-                <ADMEmpresaList />
-              </Route>
-              <Route exact path="/Empresa/novo">
-                <ADMEmpresaForm />
-              </Route>
-              <Route exact path="/Empresa/edit/:id">
-                <ADMEmpresaForm />
-              </Route>
-              <Route exact path="/Setor">
-                <ADMSetorList />
-              </Route>
-              <Route exact path="/Setor/novo">
-                <ADMSetorForm />
-              </Route>
-              <Route exact path="/Setor/edit/:id">
-                <ADMSetorForm />
-              </Route>
-              <Route exact path="/Politica">
-                <ADMPoliticaList />
-              </Route>
-              <Route exact path="/Politica/novo">
-                <ADMPoliticaForm />
-              </Route>
-              <Route exact path="/Politica/edit/:id">
-                <ADMPoliticaForm />
-              </Route>
-              <Route exact path="/Ramal">
-                <ADMRamalList />
-              </Route>
-              <Route exact path="/Ramal/novo">
-                <ADMRamalForm />
-              </Route>
-              <Route exact path="/Ramal/edit/:id">
-                <ADMRamalForm />
-              </Route>
-              <Route exact path="/Pabx">
-                <ADMPabxList />
-              </Route>
-              <Route exact path="/Pabx/novo">
-                <ADMPabxForm />
-              </Route>
-              <Route exact path="/Pabx/edit/:id">
-                <ADMPabxForm />
-              </Route>
-              <Route exact path="/Sugestao">
-                <ADMSugestaoList />
-              </Route>
-              <Route exact path="/AcessoADM">
-                <ADMAcessoList />
-              </Route>
-              <Route exact path="/AcessoADM/novo">
-                <ADMAcessoForm />
-              </Route>
-              <Route exact path="/AcessoADM/edit/:id">
-                <ADMAcessoForm />
-              </Route>
-            </Drawer>
-          </Switch>
-        </Box>
-      </MuiThemeProvider>
-    </BrowserRouter>
-  )
-}
+          {/* <Route exact path="/Comunicado" component={ADMComunicadoList} />
+            <Route exact path="/Comunicado/novo" component={ADMComunicadoForm} />
+            <Route exact path="/Comunicado/edit/:id" component={ADMComunicadoForm} />
 
-render(<Components />, document.getElementById('root'))
+            <Route exact path="/Empresa" component={ADMEmpresaList} />
+            <Route exact path="/Empresa/novo" component={ADMEmpresaForm} />
+            <Route exact path="/Empresa/edit/:id" component={ADMEmpresaForm} />
+
+            <Route exact path="/Setor" component={ADMSetorList} />
+            <Route exact path="/Setor/novo" component={ADMSetorForm} />
+            <Route exact path="/Setor/edit/:id" component={ADMSetorForm} />
+
+            <Route exact path="/Politica" component={ADMPoliticaList} />
+            <Route exact path="/Politica/novo" component={ADMPoliticaForm} />
+            <Route exact path="/Politica/edit/:id" component={ADMPoliticaForm} />
+
+            <Route exact path="/Ramal" component={ADMRamalList} />
+            <Route exact path="/Ramal/novo" component={ADMRamalForm} />
+            <Route exact path="/Ramal/edit/:id" component={ADMRamalForm} />
+
+            <Route exact path="/Pabx" component={ADMPabxList} />
+            <Route exact path="/Pabx/novo" component={ADMPabxForm} />
+            <Route exact path="/Pabx/edit/:id" component={ADMPabxForm} />
+
+            <Route exact path="/Sugestao" component={ADMSugestaoList} />
+
+            <Route exact path="/AcessoADM" component={ADMAcessoList} />
+            <Route exact path="/AcessoADM/novo" component={ADMAcessoForm} />
+            <Route exact path="/AcessoADM/edit/:id" component={ADMAcessoForm} /> */}
+        </Drawer>
+        {/* </Switch> */}
+      </Box>
+    </MuiThemeProvider>
+  </BrowserRouter>,
+  document.querySelector("#root")
+);

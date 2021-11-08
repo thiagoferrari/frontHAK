@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 	form: {
 		maxWidth: '100%',
 		display: 'inline-block',
-		alignItems: 'center',
+		textAlign: 'center',
 		justifyContent: 'space-around',
 		flexWrap: 'wrap',
 		'& .MuiFormControl-root': {
@@ -72,7 +72,7 @@ export default function ADMColaboradorForm() {
 
 	const [setores, setSetores] = useState()
 
-	const [form, setForm] = useState({})
+	const [form, setForm] = useState({stAtivo: true})
 
 	useEffect(async () => {
 		// Verifica se tem o parâmetro id na rota. Se tiver, temos que buscar
@@ -186,7 +186,7 @@ export default function ADMColaboradorForm() {
 				/>
 
 				<FormControl className={classes.checkbox} fullWidth>
-					<FormControlLabel
+					<FormControlLabel required={true}
 						control={<Checkbox id="stAtivo"
 							checked={(form.stAtivo ? true : false)}
 							onChange={e => (
