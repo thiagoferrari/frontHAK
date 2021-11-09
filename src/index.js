@@ -11,7 +11,7 @@ import Login from './ui/Login';
 // ADM:
 import ADMDrawer from './ui/Components/ADMDrawer';
 import ADMColaboradorList from './ui/AreaADM/ADMColaboradorList'
-import ADMColaboradorForm from './ui/AreaADM/ADMColaboradorList'
+import ADMColaboradorForm from './ui/AreaADM/ADMColaboradorForm'
 import ADMComunicadoList from './ui/AreaADM/ADMComunicadoList'
 import ADMComunicadoForm from './ui/AreaADM/ADMComunicadoForm'
 import ADMEmpresaList from './ui/AreaADM/ADMEmpresaList'
@@ -28,6 +28,7 @@ import ADMSugestaoList from './ui/AreaADM/ADMSugestaoList'
 import ADMSugestaoForm from './ui/AreaADM/ADMSugestaoForm'
 import ADMAcessoList from './ui/AreaADM/ADMAcessoList'
 import ADMAcessoForm from './ui/AreaADM/ADMAcessoForm'
+
 
 import * as React from 'react';
 import { render } from 'react-dom';
@@ -57,54 +58,129 @@ render(
   <BrowserRouter>
     <MuiThemeProvider theme={theme}>
       <Box id="routed" >
-        <Drawer>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/app-sugestoes" component={Sugestoes} />
-          <Route exact path="/app-empresas" component={Empresa} />
-          <Route exact path="/app-ramais" component={Ramais} />
-          <Route exact path="/app-emails" component={Emails} />
-          <Route exact path="/app-politicas" component={Politicas} />
-          <Route exact path="/app-pabx" component={Pabx} />
-          <Route exact path="/app-login" component={Login} />
+        <Switch>
+          <Route exact path="/">
+            <Drawer corpo={<Home />} />
+          </Route>
+          <Route exact path="/app-sugestoes">
+            <Drawer corpo={<Sugestoes />} />
+          </Route>
+          <Route exact path="/app-empresas">
+            <Drawer corpo={<Empresa />} />
+          </Route>
+          <Route exact path="/app-ramais">
+            <Drawer corpo={<Ramais />} />
+          </Route>
+          <Route exact path="/app-emails">
+            <Drawer corpo={<Emails />} />
+          </Route>
+          <Route exact path="/app-politicas">
+            <Drawer corpo={<Politicas />} />
+          </Route>
+          <Route exact path="/app-pabx">
+            <Drawer corpo={<Pabx />} />
+          </Route>
 
-          {/* ADM: */}
-          <Route exact path="/ADM" /* component={ADMHome} */ />
 
-          {/* <Route exact path="/Colaborador" component={ADMColaboradorList} />
-          <Route path="/Colaborador/novo" component={ADMColaboradorForm} /> */}
-          <Route path="/Colaborador/:id" component={ADMColaboradorForm} />
 
-          {/* <Route exact path="/Comunicado" component={ADMComunicadoList} />
-            <Route exact path="/Comunicado/novo" component={ADMComunicadoForm} />
-            <Route exact path="/Comunicado/edit/:id" component={ADMComunicadoForm} />
+          {/*ÁREA ADM*/}
+          <Route exact path="/app-login">
+            <ADMDrawer corpo={<ADMAcessoList />} />
+          </Route>
+          <Route exact path="/Colaborador">
+            <ADMDrawer corpo={<ADMColaboradorList />} />
+          </Route>
+          <Route exact path="/Colaborador/novo">
+            <ADMDrawer corpo={<ADMColaboradorForm />} />
+          </Route>
+          <Route exact path="/Colaborador/edit/:id">
+            <ADMDrawer corpo={<ADMColaboradorForm />} />
+          </Route>
 
-            <Route exact path="/Empresa" component={ADMEmpresaList} />
-            <Route exact path="/Empresa/novo" component={ADMEmpresaForm} />
-            <Route exact path="/Empresa/edit/:id" component={ADMEmpresaForm} />
+          <Route exact path="/Comunicado">
+            <ADMDrawer corpo={<ADMComunicadoList />} />
+          </Route>
+          <Route exact path="/Comunicado/novo">
+            <ADMDrawer corpo={<ADMComunicadoForm />} />
+          </Route>
+          <Route exact path="/Comunicado/edit/:id">
+            <ADMDrawer corpo={<ADMComunicadoForm />} />
+          </Route>
 
-            <Route exact path="/Setor" component={ADMSetorList} />
-            <Route exact path="/Setor/novo" component={ADMSetorForm} />
-            <Route exact path="/Setor/edit/:id" component={ADMSetorForm} />
+          <Route exact path="/Empresa">
+            <ADMDrawer corpo={<ADMEmpresaList />} />
+          </Route>
+          <Route exact path="/Empresa/novo">
+            <ADMDrawer corpo={<ADMEmpresaForm />} />
+          </Route>
+          <Route exact path="/Empresa/edit/:id">
+            <ADMDrawer corpo={<ADMEmpresaForm />} />
+          </Route>
 
-            <Route exact path="/Politica" component={ADMPoliticaList} />
-            <Route exact path="/Politica/novo" component={ADMPoliticaForm} />
-            <Route exact path="/Politica/edit/:id" component={ADMPoliticaForm} />
+          <Route exact path="/Setor">
+            <ADMDrawer corpo={<ADMSetorList />} />
+          </Route>
+          <Route exact path="/Setor/novo">
+            <ADMDrawer corpo={<ADMSetorForm />} />
+          </Route>
+          <Route exact path="/Setor/edit/:id">
+            <ADMDrawer corpo={<ADMSetorForm />} />
+          </Route>
 
-            <Route exact path="/Ramal" component={ADMRamalList} />
-            <Route exact path="/Ramal/novo" component={ADMRamalForm} />
-            <Route exact path="/Ramal/edit/:id" component={ADMRamalForm} />
+          <Route exact path="/Politica">
+            <ADMDrawer corpo={<ADMPoliticaList />} />
+          </Route>
+          <Route exact path="/Politica/novo">
+            <ADMDrawer corpo={<ADMPoliticaForm />} />
+          </Route>
+          <Route exact path="/Politica/edit/:id">
+            <ADMDrawer corpo={<ADMPoliticaForm />} />
+          </Route>
 
-            <Route exact path="/Pabx" component={ADMPabxList} />
-            <Route exact path="/Pabx/novo" component={ADMPabxForm} />
-            <Route exact path="/Pabx/edit/:id" component={ADMPabxForm} />
+          <Route exact path="/Ramal">
+            <ADMDrawer corpo={<ADMRamalList />} />
+          </Route>
+          <Route exact path="/Ramal/novo">
+            <ADMDrawer corpo={<ADMRamalForm />} />
+          </Route>
+          <Route exact path="/Ramal/edit/:id">
+            <ADMDrawer corpo={<ADMRamalForm />} />
+          </Route>
 
-            <Route exact path="/Sugestao" component={ADMSugestaoList} />
+          <Route exact path="/Pabx">
+            <ADMDrawer corpo={<ADMPabxList />} />
+          </Route>
+          <Route exact path="/Pabx/novo">
+            <ADMDrawer corpo={<ADMPabxForm />} />
+          </Route>
+          <Route exact path="/Pabx/edit/:id">
+            <ADMDrawer corpo={<ADMPabxForm />} />
+          </Route>
 
-            <Route exact path="/AcessoADM" component={ADMAcessoList} />
-            <Route exact path="/AcessoADM/novo" component={ADMAcessoForm} />
-            <Route exact path="/AcessoADM/edit/:id" component={ADMAcessoForm} /> */}
-        </Drawer>
-        {/* </Switch> */}
+          <Route exact path="/Pabx">
+            <ADMDrawer corpo={<ADMPabxList />} />
+          </Route>
+          <Route exact path="/Pabx/novo">
+            <ADMDrawer corpo={<ADMPabxForm />} />
+          </Route>
+          <Route exact path="/Pabx/edit/:id">
+            <ADMDrawer corpo={<ADMPabxForm />} />
+          </Route>
+
+          <Route exact path="/Acesso">
+            <ADMDrawer corpo={<ADMAcessoList />} />
+          </Route>
+          <Route exact path="/Acesso/novo">
+            <ADMDrawer corpo={<ADMAcessoForm />} />
+          </Route>
+          <Route exact path="/Acesso/edit/:id">
+            <ADMDrawer corpo={<ADMAcessoForm />} />
+          </Route>
+
+          <Route exact path="/Sugestao">
+            <ADMDrawer corpo={<ADMSugestaoList />} />
+          </Route>
+        </Switch>
       </Box>
     </MuiThemeProvider>
   </BrowserRouter>,

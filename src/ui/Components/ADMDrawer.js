@@ -16,6 +16,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import MenuIcon from "@material-ui/icons/Menu";
+import { Link } from "react-router-dom";
 
 import logo from '../../img/logo.png'
 
@@ -115,102 +116,104 @@ export default function (props) {
 					</div>
 				</Toolbar>
 			</AppBar>
-			<Drawer className={classes.drawer} open={open}
+			<Drawer
+				className={classes.drawer}
 				variant={isMdUp ? "permanent" : "temporary"}
-				classes={{ paper: classes.drawerPaper }}
-				anchor="left" onClose={toggleDrawer}>
+				classes={{
+					paper: classes.drawerPaper
+				}}
+				anchor="left"
+				open={open}
+				onClose={toggleDrawer}
+			>
 				<div className={classes.toolbar} />
 
 				<Divider />
 
-				<Button href='/' sx={{ textTransform: 'none' }}>
+				<Link to='/Colaborador'>
 					<ListItem button>
 						<ListItemIcon>
-							<HomeIcon />
+							<LightbulbIcon />
 						</ListItemIcon>
 						<ListItemText primary={'Colaboradores'} />
 					</ListItem>
-				</Button>
+				</Link>
 
-				<Button href='/sugestoes' sx={{ textTransform: 'none' }}>
+				<Link to='/Comunicado'>
 					<ListItem button>
 						<ListItemIcon>
 							<LightbulbIcon />
 						</ListItemIcon>
 						<ListItemText primary={'Comunicados'} />
 					</ListItem>
-				</Button>
+				</Link>
 
-				<Divider />
-
-				<Button href='/empresa' sx={{ textTransform: 'none' }}>
+				<Link to='/Empresa'>
 					<ListItem button>
 						<ListItemIcon>
 							<InfoIcon />
 						</ListItemIcon>
 						<ListItemText primary={'Empresas'} />
 					</ListItem>
-				</Button>
+				</Link>
 
-				<Button href='/ramais' sx={{ textTransform: 'none' }}>
+				<Link to='/Setor'>
 					<ListItem button>
 						<ListItemIcon>
 							<AddIcCallIcon />
 						</ListItemIcon>
 						<ListItemText primary={'Setores'} />
 					</ListItem>
-				</Button>
+				</Link>
 
-				<Button href='/emails' sx={{ textTransform: 'none' }}>
+				<Link to='/Politica'>
 					<ListItem button>
 						<ListItemIcon>
 							<AlternateEmailIcon />
 						</ListItemIcon>
 						<ListItemText primary={'Políticas'} />
 					</ListItem>
-				</Button>
+				</Link>
 
-				<Button href='/politicas' sx={{ textTransform: 'none' }}>
+				<Link to='/Ramal'>
 					<ListItem button>
 						<ListItemIcon>
 							<LocalPoliceIcon />
 						</ListItemIcon>
 						<ListItemText primary={'Ramais'} />
 					</ListItem>
-				</Button>
+				</Link>
 
-				<Button href='/pabx' sx={{ textTransform: 'none' }}>
+				<Link to='/Pabx'>
 					<ListItem button>
 						<ListItemIcon>
 							<DialerSipIcon />
 						</ListItemIcon>
 						<ListItemText primary={'Instruções PABX'} />
 					</ListItem>
-				</Button>
+				</Link>
 
-				<Divider />
-
-				<Button href='/login' sx={{ textTransform: 'none' }}>
+				<Link to='/Sugestao'>
 					<ListItem button>
 						<ListItemIcon>
 							<ExtensionIcon />
 						</ListItemIcon>
 						<ListItemText primary={'Sugest. Recebidas'} />
 					</ListItem>
-				</Button>
+				</Link>
 
-				<Button href='/login' sx={{ textTransform: 'none' }}>
+				<Link to='/AcessoADM'>
 					<ListItem button>
 						<ListItemIcon>
 							<ExtensionIcon />
 						</ListItemIcon>
 						<ListItemText primary={'Acesso ADM'} />
 					</ListItem>
-				</Button>
+				</Link>
 
 			</Drawer>
 			<Box sx={{ flexGrow: 1, p: 3, marginY: '5%' }}>
-				{props.children}
+				{props.corpo}
 			</Box>
 		</div>
 	);

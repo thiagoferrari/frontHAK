@@ -10,11 +10,11 @@ import EditIcon from '@material-ui/icons/Edit';
 import Toolbar from '@material-ui/core/Toolbar'
 import Button from '@material-ui/core/Button'
 import AddBoxIcon from '@material-ui/icons/AddBox';
+import { useHistory } from 'react-router-dom'
 import ConfirmDialog from '../Components/ConfirmDialog'
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { DataGrid } from '@material-ui/data-grid'
-import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
 	table: {
@@ -35,7 +35,7 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-export default function ADMColaboradorList() {
+export default function () {
 	const classes = useStyles()
 
 	// Variáveis que conterão dados PRECISAM ser inicializadas como vetores vazios
@@ -46,6 +46,8 @@ export default function ADMColaboradorList() {
 	const [sbSeverity, setSbSeverity] = useState('success')
 	const [sbMessage, setSbMessage] = useState('Exclusão realizada com sucesso.')
 	const [gridLoading, setGridLoading] = useState(false)
+
+	const history = useHistory()
 
 	useEffect(() => {
 		setTimeout(() => getData(), 100)
@@ -71,20 +73,10 @@ export default function ADMColaboradorList() {
 		setGridLoading(false)
 	}
 
-	const [snackState, setSnackState] = useState({
-		open: false,
-		severity: 'success',
-		message: 'Cliente salvo com sucesso'
-	})
-
-	const [btnSendState, setBtnSendState] = useState({
-		disabled: false,
-		label: 'Enviar'
-	})
-
 	async function deleteItem() {
 		try {
 			await axios.delete(`http://localhost:3333/Colaborador/${deletable}`)
+			getData()     // Atualiza os dados da tabela
 			setSbSeverity('success')
 			setSbMessage('Exclusão efetuada com sucesso.')
 		}
@@ -94,7 +86,6 @@ export default function ADMColaboradorList() {
 			setSbMessage('ERRO: ' + error.message)
 		}
 		setSbOpen(true)   // Exibe a snackbar
-		getData()     // Atualiza os dados da tabela
 	}
 
 	function handleDialogClose(result) {
@@ -153,12 +144,9 @@ export default function ADMColaboradorList() {
 			headerAlign: 'center',
 			flex: true,
 			renderCell: params => (
-				<IconButton
-					/* onMouseDown={() => history.push(`/Colaborador/edit/${params.id}`)} */
-					/* onMouseDown={() => navigate(`/Colaborador/edit/${params.id}`)} */
-					onClick={() => window.location.href = `http://localhost:3000/Colaborador/edit/${params.id}`}>
+				<IconButton onMouseDown={() => history.push(`/Colaborador/edit/${params.id}`)}>
 					<EditIcon />
-				</IconButton >
+				</IconButton>
 			)
 		},
 		{
@@ -187,17 +175,13 @@ export default function ADMColaboradorList() {
 				</MuiAlert>
 			</Snackbar>
 
-			<h1 style={{ textAlign: 'center' }}>Listagem de Colaboradores</h1>
+			<h1 onClick={() => getData()} style={{ textAlign: 'center' }}>Listagem de Colaboradores</h1>
 			<Toolbar className={classes.toolbar}>
-				<Link to="/Colaborador/novo">
-					<Button color="secondary" variant="contained"
-						size="large" startIcon={<AddBoxIcon />}
-						/* onClick={() => history.push('/Colaborador/novo')} */
-						/* onClick={() => navigate('/Colaborador/novo')} */
-						onClick={() => window.location.href = `http://localhost:3000/Colaborador/novo`}>
-						Novo Colaborador
-					</Button>
-				</Link>
+				<Button color="secondary" variant="contained"
+					size="large" startIcon={<AddBoxIcon />}
+					onMouseDown={() => history.push(`/Colaborador/novo`)}>
+					Novo Colaborador
+				</Button>
 			</Toolbar>
 			<Paper elevation={4}>
 				<DataGrid className={classes.dataGrid} rows={dados}

@@ -16,8 +16,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import MenuIcon from "@material-ui/icons/Menu";
-/* import Link from "@material-ui/core/Link"; */
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 import logo from '../../img/logo.png'
 
@@ -60,8 +59,7 @@ const useStyles = makeStyles(theme => ({
 		marginRight: theme.spacing(2),
 		[theme.breakpoints.up("md")]: {
 			display: "none"
-		},
-		color: 'white'
+		}
 	},
 	toolbar: {
 		...theme.mixins.toolbar,
@@ -85,7 +83,6 @@ export default function (props) {
 	const classes = useStyles();
 	const theme = useTheme();
 	const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
-	const [logged, setLogged] = React.useState(true);
 
 	const [open, setOpen] = React.useState(false);
 
@@ -101,241 +98,155 @@ export default function (props) {
 	};
 
 	return (
-			<div className={classes.root}>
-				<CssBaseline />
-				<AppBar position="fixed" className={classes.appBar}>
-					<Toolbar>
-						<IconButton
-							color="inherit"
-							aria-label="open drawer"
-							edge="start"
-							onClick={toggleDrawer}
-							className={classes.menuButton}
-						>
-							<MenuIcon />
-						</IconButton>
-						<div className={classes.logoHorizontallyCenter}>
-							<img src={logo} className={classes.logo} />
-						</div>
-					</Toolbar>
-				</AppBar>
-				<Drawer
-					className={classes.drawer}
-					variant={isMdUp ? "permanent" : "temporary"}
-					classes={{
-						paper: classes.drawerPaper
-					}}
-					anchor="left"
-					open={open}
-					onClose={toggleDrawer}
-				>
-					<div className={classes.toolbar} />
+		<div className={classes.root}>
+			<CssBaseline />
+			<AppBar position="fixed" className={classes.appBar}>
+				<Toolbar>
+					<IconButton
+						color="inherit"
+						aria-label="open drawer"
+						edge="start"
+						onClick={toggleDrawer}
+						className={classes.menuButton}
+					>
+						<MenuIcon />
+					</IconButton>
+					<div className={classes.logoHorizontallyCenter}>
+						<img src={logo} className={classes.logo} />
+					</div>
+				</Toolbar>
+			</AppBar>
+			<Drawer
+				className={classes.drawer}
+				variant={isMdUp ? "permanent" : "temporary"}
+				classes={{
+					paper: classes.drawerPaper
+				}}
+				anchor="left"
+				open={open}
+				onClose={toggleDrawer}
+			>
+				<div className={classes.toolbar} />
 
-					<Divider />
+				<Divider />
 
-					<Link to='/'>
-						<ListItem button>
-							<ListItemIcon>
-								<HomeIcon />
-							</ListItemIcon>
-							<ListItemText primary={'Página Inicial'} />
-						</ListItem>
-					</Link>
+				<Link to='/'>
+					<ListItem button>
+						<ListItemIcon>
+							<HomeIcon />
+						</ListItemIcon>
+						<ListItemText primary={'Página Inicial'} />
+					</ListItem>
+				</Link>
 
-					<Link to='/app-sugestoes'>
-						<ListItem button>
-							<ListItemIcon>
-								<LightbulbIcon />
-							</ListItemIcon>
-							<ListItemText primary={'Sugestões'} />
-						</ListItem>
-					</Link>
+				<Link to='/app-sugestoes'>
+					<ListItem button>
+						<ListItemIcon>
+							<LightbulbIcon />
+						</ListItemIcon>
+						<ListItemText primary={'Sugestões'} />
+					</ListItem>
+				</Link>
 
-					<Divider />
+				<Divider />
 
-					<Link to='/app-empresas'>
-						<ListItem button>
-							<ListItemIcon>
-								<InfoIcon />
-							</ListItemIcon>
-							<ListItemText primary={'Dados da Empresa'} />
-						</ListItem>
-					</Link>
+				<Link to='/app-empresas'>
+					<ListItem button>
+						<ListItemIcon>
+							<InfoIcon />
+						</ListItemIcon>
+						<ListItemText primary={'Dados da Empresa'} />
+					</ListItem>
+				</Link>
 
-					<Link to='/app-ramais'>
-						<ListItem button>
-							<ListItemIcon>
-								<AddIcCallIcon />
-							</ListItemIcon>
-							<ListItemText primary={'Lista de Ramais'} />
-						</ListItem>
-					</Link>
+				<Link to='/app-ramais'>
+					<ListItem button>
+						<ListItemIcon>
+							<AddIcCallIcon />
+						</ListItemIcon>
+						<ListItemText primary={'Lista de Ramais'} />
+					</ListItem>
+				</Link>
 
-					<Link to='/app-emails'>
-						<ListItem button>
-							<ListItemIcon>
-								<AlternateEmailIcon />
-							</ListItemIcon>
-							<ListItemText primary={'Lista de E-mails'} />
-						</ListItem>
-					</Link>
+				<Link to='/app-emails'>
+					<ListItem button>
+						<ListItemIcon>
+							<AlternateEmailIcon />
+						</ListItemIcon>
+						<ListItemText primary={'Lista de E-mails'} />
+					</ListItem>
+				</Link>
 
-					<Link to='/app-politicas'>
-						<ListItem button>
-							<ListItemIcon>
-								<LocalPoliceIcon />
-							</ListItemIcon>
-							<ListItemText primary={'Políticas/Regras Internas'} />
-						</ListItem>
-					</Link>
+				<Link to='/app-politicas'>
+					<ListItem button>
+						<ListItemIcon>
+							<LocalPoliceIcon />
+						</ListItemIcon>
+						<ListItemText primary={'Políticas/Regras Internas'} />
+					</ListItem>
+				</Link>
 
-					<Link to='/app-pabx'>
-						<ListItem button>
-							<ListItemIcon>
-								<DialerSipIcon />
-							</ListItemIcon>
-							<ListItemText primary={'Operações do PABX'} />
-						</ListItem>
-					</Link>
+				<Link to='/app-pabx'>
+					<ListItem button>
+						<ListItemIcon>
+							<DialerSipIcon />
+						</ListItemIcon>
+						<ListItemText primary={'Operações do PABX'} />
+					</ListItem>
+				</Link>
 
-					<Divider />
+				<Divider />
 
-					<Link href='http://refeicao.feak.local/#!/'>
-						<ListItem button>
-							<ListItemIcon>
-								<FoodBankIcon />
-							</ListItemIcon>
-							<ListItemText primary={'Portal de Refeições'} />
-						</ListItem>
-					</Link>
+				<Link href='http://refeicao.feak.local/#!/'>
+					<ListItem button>
+						<ListItemIcon>
+							<FoodBankIcon />
+						</ListItemIcon>
+						<ListItemText primary={'Portal de Refeições'} />
+					</ListItem>
+				</Link>
 
-					<Link href='http://ponto.feak.local/#!/'>
-						<ListItem button>
-							<ListItemIcon>
-								<WatchLaterIcon />
-							</ListItemIcon>
-							<ListItemText primary={'Ocorrência de Ponto'} />
-						</ListItem>
-					</Link>
+				<Link href='http://ponto.feak.local/#!/'>
+					<ListItem button>
+						<ListItemIcon>
+							<WatchLaterIcon />
+						</ListItemIcon>
+						<ListItemText primary={'Ocorrência de Ponto'} />
+					</ListItem>
+				</Link>
 
-					<Link href='http://acidente.feak.local/#!/'>
-						<ListItem button>
-							<ListItemIcon>
-								<NewReleasesIcon />
-							</ListItemIcon>
-							<ListItemText primary={'Ocorrência de Acidente'} />
-						</ListItem>
-					</Link>
+				<Link href='http://acidente.feak.local/#!/'>
+					<ListItem button>
+						<ListItemIcon>
+							<NewReleasesIcon />
+						</ListItemIcon>
+						<ListItemText primary={'Ocorrência de Acidente'} />
+					</ListItem>
+				</Link>
 
-					<Link href='http://gestaopessoas.feak.local/#!/'>
-						<ListItem button>
-							<ListItemIcon>
-								<AssignmentIndIcon />
-							</ListItemIcon>
-							<ListItemText primary={'Gestão de Pessoas'} />
-						</ListItem>
-					</Link>
+				<Link href='http://gestaopessoas.feak.local/#!/'>
+					<ListItem button>
+						<ListItemIcon>
+							<AssignmentIndIcon />
+						</ListItemIcon>
+						<ListItemText primary={'Gestão de Pessoas'} />
+					</ListItem>
+				</Link>
 
-					<Divider />
+				<Divider />
 
-					<Link to='/app-login'>
-						<ListItem button>
-							<ListItemIcon>
-								<ExtensionIcon />
-							</ListItemIcon>
-							<ListItemText primary={'Área Administrativa'} />
-						</ListItem>
-					</Link>
-
-					{logged &&
-						<>
-							<Link to='/Colaborador'>
-								<ListItem button>
-									<ListItemIcon>
-										<LightbulbIcon />
-									</ListItemIcon>
-									<ListItemText primary={'Colaboradores'} />
-								</ListItem>
-							</Link>
-
-							{/* <Link to='/Comunicado'>
-								<ListItem button>
-									<ListItemIcon>
-										<LightbulbIcon />
-									</ListItemIcon>
-									<ListItemText primary={'Comunicados'} />
-								</ListItem>
-							</Link> */}
-
-							<Link to='/Empresa'>
-								<ListItem button>
-									<ListItemIcon>
-										<InfoIcon />
-									</ListItemIcon>
-									<ListItemText primary={'Empresas'} />
-								</ListItem>
-							</Link>
-
-							<Link to='/Setor'>
-								<ListItem button>
-									<ListItemIcon>
-										<AddIcCallIcon />
-									</ListItemIcon>
-									<ListItemText primary={'Setores'} />
-								</ListItem>
-							</Link>
-
-							<Link to='/Politica'>
-								<ListItem button>
-									<ListItemIcon>
-										<AlternateEmailIcon />
-									</ListItemIcon>
-									<ListItemText primary={'Políticas'} />
-								</ListItem>
-							</Link>
-
-							<Link to='/Ramal'>
-								<ListItem button>
-									<ListItemIcon>
-										<LocalPoliceIcon />
-									</ListItemIcon>
-									<ListItemText primary={'Ramais'} />
-								</ListItem>
-							</Link>
-
-							<Link to='/Pabx'>
-								<ListItem button>
-									<ListItemIcon>
-										<DialerSipIcon />
-									</ListItemIcon>
-									<ListItemText primary={'Instruções PABX'} />
-								</ListItem>
-							</Link>
-
-							<Link to='/Sugestao'>
-								<ListItem button>
-									<ListItemIcon>
-										<ExtensionIcon />
-									</ListItemIcon>
-									<ListItemText primary={'Sugest. Recebidas'} />
-								</ListItem>
-							</Link>
-
-							<Link to='/AcessoADM'>
-								<ListItem button>
-									<ListItemIcon>
-										<ExtensionIcon />
-									</ListItemIcon>
-									<ListItemText primary={'Acesso ADM'} />
-								</ListItem>
-							</Link>
-						</>
-					}
-
-				</Drawer>
-				<Box sx={{ flexGrow: 1, p: 3, marginY: '5%' }}>
-					{props.children}
-				</Box>
-			</div>
+				<Link to='/app-login'>
+					<ListItem button>
+						<ListItemIcon>
+							<ExtensionIcon />
+						</ListItemIcon>
+						<ListItemText primary={'Área Administrativa'} />
+					</ListItem>
+				</Link>
+			</Drawer>
+			<Box sx={{ flexGrow: 1, p: 3, marginY: '5%' }}>
+				{props.corpo}
+			</Box>
+		</div>
 	);
 }
