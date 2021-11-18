@@ -130,16 +130,16 @@ export default function (props) {
 
 				<Divider />
 
-				<Link to='/Colaborador'>
+				<Link to='/Colaborador' style={{ textDecoration: 'none', color: 'black' }}>
 					<ListItem button>
 						<ListItemIcon>
-							<LightbulbIcon />
+							<AssignmentIndIcon />
 						</ListItemIcon>
 						<ListItemText primary={'Colaboradores'} />
 					</ListItem>
 				</Link>
 
-				<Link to='/Comunicado'>
+				<Link to='/Comunicado' style={{ textDecoration: 'none', color: 'black' }}>
 					<ListItem button>
 						<ListItemIcon>
 							<LightbulbIcon />
@@ -148,7 +148,7 @@ export default function (props) {
 					</ListItem>
 				</Link>
 
-				<Link to='/Empresa'>
+				<Link to='/Empresa' style={{ textDecoration: 'none', color: 'black' }}>
 					<ListItem button>
 						<ListItemIcon>
 							<InfoIcon />
@@ -157,16 +157,16 @@ export default function (props) {
 					</ListItem>
 				</Link>
 
-				<Link to='/Setor'>
+				<Link to='/Setor' style={{ textDecoration: 'none', color: 'black' }}>
 					<ListItem button>
 						<ListItemIcon>
-							<AddIcCallIcon />
+							<LocalPoliceIcon />
 						</ListItemIcon>
 						<ListItemText primary={'Setores'} />
 					</ListItem>
 				</Link>
 
-				<Link to='/Politica'>
+				<Link to='/Politica' style={{ textDecoration: 'none', color: 'black' }}>
 					<ListItem button>
 						<ListItemIcon>
 							<AlternateEmailIcon />
@@ -175,16 +175,16 @@ export default function (props) {
 					</ListItem>
 				</Link>
 
-				<Link to='/Ramal'>
+				<Link to='/Ramal' style={{ textDecoration: 'none', color: 'black' }}>
 					<ListItem button>
 						<ListItemIcon>
-							<LocalPoliceIcon />
+							<AddIcCallIcon />
 						</ListItemIcon>
 						<ListItemText primary={'Ramais'} />
 					</ListItem>
 				</Link>
 
-				<Link to='/Pabx'>
+				<Link to='/Pabx' style={{ textDecoration: 'none', color: 'black' }}>
 					<ListItem button>
 						<ListItemIcon>
 							<DialerSipIcon />
@@ -193,7 +193,7 @@ export default function (props) {
 					</ListItem>
 				</Link>
 
-				<Link to='/Sugestao'>
+				<Link to='/Sugestao' style={{ textDecoration: 'none', color: 'black' }}>
 					<ListItem button>
 						<ListItemIcon>
 							<ExtensionIcon />
@@ -202,7 +202,7 @@ export default function (props) {
 					</ListItem>
 				</Link>
 
-				<Link to='/AcessoADM'>
+				<Link to='/Login' style={{ textDecoration: 'none', color: 'black' }}>
 					<ListItem button>
 						<ListItemIcon>
 							<ExtensionIcon />
@@ -211,6 +211,16 @@ export default function (props) {
 					</ListItem>
 				</Link>
 
+				<Divider />
+
+				<Link to='/app-login' style={{ textDecoration: 'none', color: 'black' }}>
+					<ListItem button>
+						<ListItemIcon>
+							<ExtensionIcon />
+						</ListItemIcon>
+						<ListItemText primary={'Voltar ao Intranet'} />
+					</ListItem>
+				</Link>
 			</Drawer>
 			<Box sx={{ flexGrow: 1, p: 3, marginY: '5%' }}>
 				{props.corpo}

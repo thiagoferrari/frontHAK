@@ -15,6 +15,9 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
+import img1 from '../img/Carousel/Imagem2.png'
+import letreiro from '../img/Carousel/letreiro.png'
+
 import axios from 'axios';
 
 import './Components/ImageSlider/style.css'
@@ -54,17 +57,35 @@ export default function BasicCard() {
 
 	return (
 		<div className={classes.div}>
-			<h1 className={classes.titulo} >Seja bem vindo ao Intranet</h1>
-			<ImageSlider slides={SliderData} />
+			<div>
+				<img src={img1} style={{
+					marginTop: '-50px', float: 'top',
+					width: '100%', maxWidth: '800px',
+					borderBottomLeftRadius: `15px`,
+					borderBottomRightRadius: `15px`
+				}} />
+				<img src={letreiro} style={{
+					marginTop: '-50px', position: 'absolute',
+					left: '50%',
+					/* marginLeft: '50%',
+					marginRight: 'auto', */
+					top: '27%',
+					width: '25%',
+					minWidth: '150px',
+					transform: 'translate(-50%, -50%)'/* , float: 'top' */
+				}} />
+			</div>
+
 			<h1 className={classes.titulo} >Comunicados Importantes</h1>
 			{dados &&
 				dados.map((obj, index) => {
+					console.log(dados)
 					return (
 						<Accordion defaultExpanded={true} key={index}>
 							<AccordionSummary expandIcon={<ExpandMoreIcon />}>
-								<Typography className={classes.assunto}><b>{Object.values(obj)[1]}</b></Typography>
+								<Typography className={classes.assunto}><b>{Object.values(obj)[2]}</b></Typography>
 							</AccordionSummary>
-							<AccordionDetails><Typography>{Object.values(obj)[2]}</Typography></AccordionDetails>
+							<AccordionDetails><Typography>{Object.values(obj)[3]}</Typography></AccordionDetails>
 						</Accordion>
 					)
 				})

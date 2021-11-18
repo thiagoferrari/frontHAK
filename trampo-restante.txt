@@ -1,17 +1,34 @@
-fazer botao de login > 
+ ajeitar homepage OK
+
 	tela de cadastros:
-		colaborador - criar, editar, e ver todos
-		comunicado - criar, editar, e ver todos
-		empresa - criar, editar, e ver todos
-		pabx-instrucoes - criar, editar, e ver todos
-		politicas - criar, editar, e ver todos
-		ramais - criar, editar, e ver todos
-		setores - criar, editar, e ver todos
+		fazer tela de login de acesso, baseando no localstorage para ver se a pessoa está logada:
+		form -> opcao de permanecer conectado, localstorage guarda em var que sim esta logado
 
-		ver sugestoes feitas pelos funcionarios
-		login de acesso - criar, editar, e ver todos
+		verifica no localstorage se ja esta logado, se nao:
+
+		fetch para validar
+		se ok vai, se nao fala que esta incorreto
+		
 
 
-fazer a tela de lista de emails
 
-ajeitar o front
+		cores, marcações, etc.
+
+	ajustes finais de front-end:
+	pagina que esta pulando de dados: 
+		 	comunicados importantes
+			dados da empresa
+			politicas
+			operacoes pabx
+
+--------------------------------------
+
+
+
+
+permitir excluir sugestoes feitas
+melhorar colunas das tabelas na listagem
+		elaborar maneira de fazer upload de imagens - :multer: e colocar aonde tem em cada form
+		FAZER tela de lista de emails
+		FAZER tela de lista de ramais
+		LISTAGEM ramais - verificar possivel melhoria no form

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory, useParams } from 'react-router-dom'
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -6,7 +7,9 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-export default function ConfirmDialog({ title = 'Confirmar', isOpen = false, onClose, children }) {
+export default function ConfirmDialog({ title = 'Confirme seu Login', isOpen = false, onClose, children }) {
+
+  const history = useHistory()
 
   const handleClose = (result) => {
     // Só chama a função onClose se a prop correspondente tiver sido passada
@@ -29,13 +32,13 @@ export default function ConfirmDialog({ title = 'Confirmar', isOpen = false, onC
         </DialogContent>
         <DialogActions>
           <Button onClick={() => handleClose(true)} color='secondary'>
-            OK
+            Lembrar Senha
           </Button>
           <Button onClick={() => handleClose(false)} autoFocus>
-            Voltar
+            Cancelar
           </Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </div >
   );
 }

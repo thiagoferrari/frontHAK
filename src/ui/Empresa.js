@@ -5,7 +5,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import kardecLogo from '../img/kardec.png';
+
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
@@ -23,6 +23,8 @@ import FolderIcon from '@mui/icons-material/Folder';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { LensTwoTone } from '@material-ui/icons';
 import { LegendToggleRounded } from '@mui/icons-material';
+
+import kardecLogo from '../img/kardec.png';
 
 import axios from 'axios';
 
@@ -58,6 +60,7 @@ export default function MediaCard() {
 			{dados &&
 				dados.map((obj, index) => {
 					delete obj.id
+					delete obj.stAtivo
 					return (
 						<Card className={classes.card}>
 							<CardMedia
@@ -79,9 +82,9 @@ export default function MediaCard() {
 								}
 							</CardContent>
 							<CardActions>
-								<Button size="small">INSTAGRAM</Button>
-								<Button size="small">SITE</Button>
-								<Button size="small">FACEBOOK</Button>
+								<Button size="small" href='https://www.instagram.com/allankardec_f/?hl=en'>INSTAGRAM</Button>
+								<Button size="small" href='https://www.instagram.com/allankardec_f/?hl=en'>SITE</Button>
+								<Button size="small" href='https://www.instagram.com/allankardec_f/?hl=en'>FACEBOOK</Button>
 							</CardActions>
 						</Card>
 					)

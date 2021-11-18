@@ -25,7 +25,6 @@ import ADMRamalForm from './ui/AreaADM/ADMRamalForm'
 import ADMPabxList from './ui/AreaADM/ADMPabxList'
 import ADMPabxForm from './ui/AreaADM/ADMPabxForm'
 import ADMSugestaoList from './ui/AreaADM/ADMSugestaoList'
-import ADMSugestaoForm from './ui/AreaADM/ADMSugestaoForm'
 import ADMAcessoList from './ui/AreaADM/ADMAcessoList'
 import ADMAcessoForm from './ui/AreaADM/ADMAcessoForm'
 
@@ -51,6 +50,9 @@ const theme = createTheme({
       main: cyan[500],
     },
   },
+  typography: {
+    "fontFamily": `'Segoe UI', 'Tahoma', 'Geneva', 'Verdana', sans-serif`,
+  }
 });
 
 
@@ -85,7 +87,8 @@ render(
 
           {/*ÁREA ADM*/}
           <Route exact path="/app-login">
-            <ADMDrawer corpo={<ADMAcessoList />} />
+            <Drawer corpo={<Login />} />
+            {/* <ADMDrawer corpo={<ADMAcessoList />} /> */}
           </Route>
           <Route exact path="/Colaborador">
             <ADMDrawer corpo={<ADMColaboradorList />} />
@@ -167,13 +170,13 @@ render(
             <ADMDrawer corpo={<ADMPabxForm />} />
           </Route>
 
-          <Route exact path="/Acesso">
+          <Route exact path="/Login">
             <ADMDrawer corpo={<ADMAcessoList />} />
           </Route>
-          <Route exact path="/Acesso/novo">
+          <Route exact path="/Login/novo">
             <ADMDrawer corpo={<ADMAcessoForm />} />
           </Route>
-          <Route exact path="/Acesso/edit/:id">
+          <Route exact path="/Login/edit/:id">
             <ADMDrawer corpo={<ADMAcessoForm />} />
           </Route>
 

@@ -18,8 +18,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { LensTwoTone } from '@material-ui/icons';
 import { LegendToggleRounded } from '@mui/icons-material';
 
-import lgpd from '../img/lgpd.jpg';
-import etica from '../img/etica.png';
+import kardecLogo from '../img/kardec.png';
 import { makeStyles } from '@mui/styles';
 
 import axios from 'axios';
@@ -52,12 +51,13 @@ export default function MediaCard() {
 			{dados &&
 				dados.map((obj, index) => {
 					delete obj.id
+					delete obj.stAtivo
 					return (
 						<Card className={classes.card}>
 							<CardMedia
 								component="img"
 								height="140"
-								image={etica}
+								image={kardecLogo}
 							/>
 							<CardContent>
 								<ListItem>
@@ -67,7 +67,7 @@ export default function MediaCard() {
 								</ListItem>
 							</CardContent>
 							<CardActions>
-								<Button size="small">LER DOC.</Button>
+								<Button size="small" href={'https://tinyurl.com/euucrsfe'}>LER DOC.</Button>
 							</CardActions>
 						</Card>
 					)

@@ -55,12 +55,15 @@ export default function BasicCard() {
 			<h1 className={classes.titulo}>Operações do PABX</h1>
 			{dados &&
 				dados.map((obj, index) => {
+					delete obj.id
+					delete obj.stAtivo
+					console.log(dados)
 					return (
 						<Accordion defaultExpanded={true} key={index}>
 							<AccordionSummary expandIcon={<ExpandMoreIcon />}>
-								<Typography className={classes.assunto}><b>{Object.values(obj)[1]}</b></Typography>
+								<Typography className={classes.assunto}><b>{Object.values(obj)[0]}</b></Typography>
 							</AccordionSummary>
-							<AccordionDetails><Typography>{Object.values(obj)[2]}</Typography></AccordionDetails>
+							<AccordionDetails><Typography>{Object.values(obj)[1]}</Typography></AccordionDetails>
 						</Accordion>
 					)
 				})

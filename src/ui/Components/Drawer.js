@@ -42,7 +42,8 @@ const drawerWidth = 280;
 
 const useStyles = makeStyles(theme => ({
 	root: {
-		display: "flex"
+		display: "flex",
+
 	},
 	appBar: {
 		zIndex: theme.zIndex.drawer + 1,
@@ -130,7 +131,7 @@ export default function (props) {
 
 				<Divider />
 
-				<Link to='/'>
+				<Link to='/' style={{ textDecoration: 'none', color: 'black' }}>
 					<ListItem button>
 						<ListItemIcon>
 							<HomeIcon />
@@ -139,7 +140,7 @@ export default function (props) {
 					</ListItem>
 				</Link>
 
-				<Link to='/app-sugestoes'>
+				<Link to='/app-sugestoes' style={{ textDecoration: 'none', color: 'black' }}>
 					<ListItem button>
 						<ListItemIcon>
 							<LightbulbIcon />
@@ -150,7 +151,7 @@ export default function (props) {
 
 				<Divider />
 
-				<Link to='/app-empresas'>
+				<Link to='/app-empresas' style={{ textDecoration: 'none', color: 'black' }}>
 					<ListItem button>
 						<ListItemIcon>
 							<InfoIcon />
@@ -159,7 +160,7 @@ export default function (props) {
 					</ListItem>
 				</Link>
 
-				<Link to='/app-ramais'>
+				<Link to='/app-ramais' style={{ textDecoration: 'none', color: 'black' }}>
 					<ListItem button>
 						<ListItemIcon>
 							<AddIcCallIcon />
@@ -168,16 +169,16 @@ export default function (props) {
 					</ListItem>
 				</Link>
 
-				<Link to='/app-emails'>
+				<Link to='/app-emails' style={{ textDecoration: 'none', color: 'black' }}>
 					<ListItem button>
 						<ListItemIcon>
 							<AlternateEmailIcon />
 						</ListItemIcon>
-						<ListItemText primary={'Lista de E-mails'} />
+						<ListItemText primary={'Lista de Emails/Colab.'} />
 					</ListItem>
 				</Link>
 
-				<Link to='/app-politicas'>
+				<Link to='/app-politicas' style={{ textDecoration: 'none', color: 'black' }}>
 					<ListItem button>
 						<ListItemIcon>
 							<LocalPoliceIcon />
@@ -186,7 +187,7 @@ export default function (props) {
 					</ListItem>
 				</Link>
 
-				<Link to='/app-pabx'>
+				<Link to='/app-pabx' style={{ textDecoration: 'none', color: 'black' }}>
 					<ListItem button>
 						<ListItemIcon>
 							<DialerSipIcon />
@@ -197,45 +198,50 @@ export default function (props) {
 
 				<Divider />
 
-				<Link href='http://refeicao.feak.local/#!/'>
-					<ListItem button>
+				<Button onClick={() => { window.open('http://refeicao.feak.local/#!/') }}
+					style={{ textDecoration: 'none', color: 'black', textTransform: 'none' }}>
+					<ListItem>
 						<ListItemIcon>
 							<FoodBankIcon />
 						</ListItemIcon>
 						<ListItemText primary={'Portal de Refeições'} />
 					</ListItem>
-				</Link>
+				</Button>
 
-				<Link href='http://ponto.feak.local/#!/'>
-					<ListItem button>
+				<Button onClick={() => { window.open('http://ponto.feak.local/#!/') }}
+					style={{ textDecoration: 'none', color: 'black', textTransform: 'none' }}>
+
+					<ListItem >
 						<ListItemIcon>
 							<WatchLaterIcon />
 						</ListItemIcon>
 						<ListItemText primary={'Ocorrência de Ponto'} />
 					</ListItem>
-				</Link>
+				</Button>
 
-				<Link href='http://acidente.feak.local/#!/'>
-					<ListItem button>
+				<Button onClick={() => { window.open('http://acidente.feak.local/#!/') }}
+					style={{ textDecoration: 'none', color: 'black', textTransform: 'none' }}>
+					<ListItem >
 						<ListItemIcon>
 							<NewReleasesIcon />
 						</ListItemIcon>
 						<ListItemText primary={'Ocorrência de Acidente'} />
 					</ListItem>
-				</Link>
+				</Button>
 
-				<Link href='http://gestaopessoas.feak.local/#!/'>
-					<ListItem button>
+				<Button onClick={() => { window.open('http://gestaopessoas.feak.local/#!/') }}
+					style={{ textDecoration: 'none', color: 'black', textTransform: 'none' }}>
+					<ListItem >
 						<ListItemIcon>
 							<AssignmentIndIcon />
 						</ListItemIcon>
 						<ListItemText primary={'Gestão de Pessoas'} />
 					</ListItem>
-				</Link>
+				</Button>
 
 				<Divider />
 
-				<Link to='/app-login'>
+				<Link to='/app-login' style={{ textDecoration: 'none', color: 'black' }}>
 					<ListItem button>
 						<ListItemIcon>
 							<ExtensionIcon />
@@ -247,6 +253,6 @@ export default function (props) {
 			<Box sx={{ flexGrow: 1, p: 3, marginY: '5%' }}>
 				{props.corpo}
 			</Box>
-		</div>
+		</div >
 	);
 }

@@ -134,7 +134,6 @@ export default function ADMEmpresaForm() {
 
 	return (
 		<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-			{console.log(form)}
 			<ConfirmDialog isOpen={dialogOpen} onClose={handleDialogClose} color="secondary">
 				Podem haver dados não salvos. Tem certeza que deseja sair?
 			</ConfirmDialog>

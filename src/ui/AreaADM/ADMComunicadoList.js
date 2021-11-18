@@ -116,7 +116,7 @@ export default function () {
 		},
 		{
 			field: 'dsTitulo',
-			headerName: 'Titulo',
+			headerName: 'Título (Assunto)',
 			flex: true
 		},
 		{
