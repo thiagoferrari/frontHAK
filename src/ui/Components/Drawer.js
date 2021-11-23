@@ -18,6 +18,8 @@ import MailIcon from "@material-ui/icons/Mail";
 import MenuIcon from "@material-ui/icons/Menu";
 import { Link } from "react-router-dom";
 
+import PodcastCard from "./PodcastCard";
+
 import logo from '../../img/logo.png'
 
 import HomeIcon from '@mui/icons-material/Home'; //Página Inicial
@@ -132,7 +134,7 @@ export default function (props) {
 				<Divider />
 
 				<Link to='/' style={{ textDecoration: 'none', color: 'black' }}>
-					<ListItem button>
+					<ListItem button onClick={() => setOpen(!open)}>
 						<ListItemIcon>
 							<HomeIcon />
 						</ListItemIcon>
@@ -141,7 +143,7 @@ export default function (props) {
 				</Link>
 
 				<Link to='/app-sugestoes' style={{ textDecoration: 'none', color: 'black' }}>
-					<ListItem button>
+					<ListItem button onClick={() => setOpen(!open)}>
 						<ListItemIcon>
 							<LightbulbIcon />
 						</ListItemIcon>
@@ -152,7 +154,7 @@ export default function (props) {
 				<Divider />
 
 				<Link to='/app-empresas' style={{ textDecoration: 'none', color: 'black' }}>
-					<ListItem button>
+					<ListItem button onClick={() => setOpen(!open)}>
 						<ListItemIcon>
 							<InfoIcon />
 						</ListItemIcon>
@@ -161,7 +163,7 @@ export default function (props) {
 				</Link>
 
 				<Link to='/app-ramais' style={{ textDecoration: 'none', color: 'black' }}>
-					<ListItem button>
+					<ListItem button onClick={() => setOpen(!open)}>
 						<ListItemIcon>
 							<AddIcCallIcon />
 						</ListItemIcon>
@@ -170,7 +172,7 @@ export default function (props) {
 				</Link>
 
 				<Link to='/app-emails' style={{ textDecoration: 'none', color: 'black' }}>
-					<ListItem button>
+					<ListItem button onClick={() => setOpen(!open)}>
 						<ListItemIcon>
 							<AlternateEmailIcon />
 						</ListItemIcon>
@@ -179,7 +181,7 @@ export default function (props) {
 				</Link>
 
 				<Link to='/app-politicas' style={{ textDecoration: 'none', color: 'black' }}>
-					<ListItem button>
+					<ListItem button onClick={() => setOpen(!open)}>
 						<ListItemIcon>
 							<LocalPoliceIcon />
 						</ListItemIcon>
@@ -188,7 +190,7 @@ export default function (props) {
 				</Link>
 
 				<Link to='/app-pabx' style={{ textDecoration: 'none', color: 'black' }}>
-					<ListItem button>
+					<ListItem button onClick={() => setOpen(!open)}>
 						<ListItemIcon>
 							<DialerSipIcon />
 						</ListItemIcon>
@@ -198,57 +200,58 @@ export default function (props) {
 
 				<Divider />
 
-				<Button onClick={() => { window.open('http://refeicao.feak.local/#!/') }}
-					style={{ textDecoration: 'none', color: 'black', textTransform: 'none' }}>
+				<a onClick={() => { window.open('http://refeicao.feak.local/#!/') }}
+					style={{ textDecoration: 'none', color: 'black', cursor: 'alias' }}>
 					<ListItem>
 						<ListItemIcon>
 							<FoodBankIcon />
 						</ListItemIcon>
 						<ListItemText primary={'Portal de Refeições'} />
 					</ListItem>
-				</Button>
+				</a>
 
-				<Button onClick={() => { window.open('http://ponto.feak.local/#!/') }}
-					style={{ textDecoration: 'none', color: 'black', textTransform: 'none' }}>
-
+				<a onClick={() => { window.open('http://ponto.feak.local/#!/') }}
+					style={{ textDecoration: 'none', color: 'black', cursor: 'alias' }}>
 					<ListItem >
 						<ListItemIcon>
 							<WatchLaterIcon />
 						</ListItemIcon>
 						<ListItemText primary={'Ocorrência de Ponto'} />
 					</ListItem>
-				</Button>
+				</a>
 
-				<Button onClick={() => { window.open('http://acidente.feak.local/#!/') }}
-					style={{ textDecoration: 'none', color: 'black', textTransform: 'none' }}>
+				<a onClick={() => { window.open('http://acidente.feak.local/#!/') }}
+					style={{ textDecoration: 'none', color: 'black', cursor: 'alias' }}>
 					<ListItem >
 						<ListItemIcon>
 							<NewReleasesIcon />
 						</ListItemIcon>
 						<ListItemText primary={'Ocorrência de Acidente'} />
 					</ListItem>
-				</Button>
+				</a>
 
-				<Button onClick={() => { window.open('http://gestaopessoas.feak.local/#!/') }}
-					style={{ textDecoration: 'none', color: 'black', textTransform: 'none' }}>
+				<a onClick={() => { window.open('http://gestaopessoas.feak.local/#!/') }}
+					style={{ textDecoration: 'none', color: 'black', cursor: 'alias' }}>
 					<ListItem >
 						<ListItemIcon>
 							<AssignmentIndIcon />
 						</ListItemIcon>
 						<ListItemText primary={'Gestão de Pessoas'} />
 					</ListItem>
-				</Button>
+				</a>
 
 				<Divider />
 
 				<Link to='/app-login' style={{ textDecoration: 'none', color: 'black' }}>
-					<ListItem button>
+					<ListItem button onClick={() => setOpen(!open)}>
 						<ListItemIcon>
 							<ExtensionIcon />
 						</ListItemIcon>
 						<ListItemText primary={'Área Administrativa'} />
 					</ListItem>
 				</Link>
+
+				<PodcastCard />
 			</Drawer>
 			<Box sx={{ flexGrow: 1, p: 3, marginY: '5%' }}>
 				{props.corpo}

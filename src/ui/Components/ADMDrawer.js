@@ -17,6 +17,7 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import MenuIcon from "@material-ui/icons/Menu";
 import { Link } from "react-router-dom";
+import TextField from "@material-ui/core/TextField";
 
 import logo from '../../img/logo.png'
 
@@ -33,7 +34,9 @@ import AssignmentIndIcon from '@mui/icons-material/AssignmentInd'; //Gestão de 
 import WatchLaterIcon from '@mui/icons-material/WatchLater'; //Ocorrência de Ponto
 import NewReleasesIcon from '@mui/icons-material/NewReleases'; //Ocorrência de Acidente
 import FoodBankIcon from '@mui/icons-material/FoodBank'; //Portal Refeição
-import ExtensionIcon from '@mui/icons-material/Extension'; //Area Administrativa
+import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace'; //Sair
+import AnnouncementIcon from '@material-ui/icons/Announcement'; //Solicitações
+import TouchAppIcon from '@material-ui/icons/TouchApp'; //Acesso ao Portal
 
 import { Button } from "@mui/material";
 
@@ -80,11 +83,13 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function (props) {
-	const classes = useStyles();
-	const theme = useTheme();
-	const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
+	const classes = useStyles()
+	const theme = useTheme()
+	const isMdUp = useMediaQuery(theme.breakpoints.up("md"))
 
-	const [open, setOpen] = React.useState(false);
+	const getItem = (key, value) => window.localStorage.getItem(key, value)
+
+	const [open, setOpen] = React.useState(false)
 
 	const toggleDrawer = event => {
 		if (
@@ -103,12 +108,9 @@ export default function (props) {
 			<AppBar position="fixed" className={classes.appBar}>
 				<Toolbar>
 					<IconButton
-						color="inherit"
-						aria-label="open drawer"
-						edge="start"
-						onClick={toggleDrawer}
-						className={classes.menuButton}
-					>
+						color="inherit" aria-label="open drawer"
+						edge="start" onClick={toggleDrawer}
+						className={classes.menuButton}>
 						<MenuIcon />
 					</IconButton>
 					<div className={classes.logoHorizontallyCenter}>
@@ -131,7 +133,7 @@ export default function (props) {
 				<Divider />
 
 				<Link to='/Colaborador' style={{ textDecoration: 'none', color: 'black' }}>
-					<ListItem button>
+					<ListItem button onClick={() => setOpen(!open)}>
 						<ListItemIcon>
 							<AssignmentIndIcon />
 						</ListItemIcon>
@@ -140,7 +142,7 @@ export default function (props) {
 				</Link>
 
 				<Link to='/Comunicado' style={{ textDecoration: 'none', color: 'black' }}>
-					<ListItem button>
+					<ListItem button onClick={() => setOpen(!open)}>
 						<ListItemIcon>
 							<LightbulbIcon />
 						</ListItemIcon>
@@ -149,7 +151,7 @@ export default function (props) {
 				</Link>
 
 				<Link to='/Empresa' style={{ textDecoration: 'none', color: 'black' }}>
-					<ListItem button>
+					<ListItem button onClick={() => setOpen(!open)}>
 						<ListItemIcon>
 							<InfoIcon />
 						</ListItemIcon>
@@ -158,7 +160,7 @@ export default function (props) {
 				</Link>
 
 				<Link to='/Setor' style={{ textDecoration: 'none', color: 'black' }}>
-					<ListItem button>
+					<ListItem button onClick={() => setOpen(!open)}>
 						<ListItemIcon>
 							<LocalPoliceIcon />
 						</ListItemIcon>
@@ -167,7 +169,7 @@ export default function (props) {
 				</Link>
 
 				<Link to='/Politica' style={{ textDecoration: 'none', color: 'black' }}>
-					<ListItem button>
+					<ListItem button onClick={() => setOpen(!open)}>
 						<ListItemIcon>
 							<AlternateEmailIcon />
 						</ListItemIcon>
@@ -176,7 +178,7 @@ export default function (props) {
 				</Link>
 
 				<Link to='/Ramal' style={{ textDecoration: 'none', color: 'black' }}>
-					<ListItem button>
+					<ListItem button onClick={() => setOpen(!open)}>
 						<ListItemIcon>
 							<AddIcCallIcon />
 						</ListItemIcon>
@@ -185,7 +187,7 @@ export default function (props) {
 				</Link>
 
 				<Link to='/Pabx' style={{ textDecoration: 'none', color: 'black' }}>
-					<ListItem button>
+					<ListItem button onClick={() => setOpen(!open)}>
 						<ListItemIcon>
 							<DialerSipIcon />
 						</ListItemIcon>
@@ -194,18 +196,18 @@ export default function (props) {
 				</Link>
 
 				<Link to='/Sugestao' style={{ textDecoration: 'none', color: 'black' }}>
-					<ListItem button>
+					<ListItem button onClick={() => setOpen(!open)}>
 						<ListItemIcon>
-							<ExtensionIcon />
+							<AnnouncementIcon />
 						</ListItemIcon>
 						<ListItemText primary={'Sugest. Recebidas'} />
 					</ListItem>
 				</Link>
 
 				<Link to='/Login' style={{ textDecoration: 'none', color: 'black' }}>
-					<ListItem button>
+					<ListItem button onClick={() => setOpen(!open)}>
 						<ListItemIcon>
-							<ExtensionIcon />
+							<TouchAppIcon />
 						</ListItemIcon>
 						<ListItemText primary={'Acesso ADM'} />
 					</ListItem>
@@ -213,18 +215,29 @@ export default function (props) {
 
 				<Divider />
 
-				<Link to='/app-login' style={{ textDecoration: 'none', color: 'black' }}>
+				<Link to='/' style={{ textDecoration: 'none', color: 'black' }}>
 					<ListItem button>
 						<ListItemIcon>
-							<ExtensionIcon />
+							<KeyboardBackspaceIcon />
 						</ListItemIcon>
 						<ListItemText primary={'Voltar ao Intranet'} />
 					</ListItem>
 				</Link>
+
+				<Link to='/' style={{ textDecoration: 'none', color: 'black' }}>
+					<ListItem button onClick={() => localStorage.clear()}>
+						<ListItemIcon>
+							<KeyboardBackspaceIcon />
+						</ListItemIcon>
+						<ListItemText primary={<>Fazer logoff
+							<br /><i> -{getItem('dsLogin')}- </i></>} />
+					</ListItem>
+				</Link>
+
 			</Drawer>
 			<Box sx={{ flexGrow: 1, p: 3, marginY: '5%' }}>
 				{props.corpo}
 			</Box>
-		</div>
+		</div >
 	);
 }

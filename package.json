@@ -22,6 +22,7 @@
     "react-icons": "^4.3.1",
     "react-material-ui-carousel": "^2.3.5",
     "react-router-dom": "^5.3.0",
+    "reshake": "^1.2.3",
     "start": "^5.1.0"
   },
   "version": "0.0.0",

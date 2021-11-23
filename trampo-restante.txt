@@ -1,25 +1,8 @@
- ajeitar homepage OK
+	seção de Timbrados e Documentos
 
-	tela de cadastros:
-		fazer tela de login de acesso, baseando no localstorage para ver se a pessoa está logada:
-		form -> opcao de permanecer conectado, localstorage guarda em var que sim esta logado
+	cores, marcações, etc.
 
-		verifica no localstorage se ja esta logado, se nao:
-
-		fetch para validar
-		se ok vai, se nao fala que esta incorreto
-		
-
-
-
-		cores, marcações, etc.
-
-	ajustes finais de front-end:
-	pagina que esta pulando de dados: 
-		 	comunicados importantes
-			dados da empresa
-			politicas
-			operacoes pabx
+	ajeitar homepage, com sliders
 
 --------------------------------------
 

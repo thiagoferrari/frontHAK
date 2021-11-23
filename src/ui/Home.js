@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { styled } from '@mui/styles';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -9,6 +10,9 @@ import { makeStyles } from '@mui/styles';
 import Carousel from 'react-material-ui-carousel';
 import ImageSlider from './Components/ImageSlider/ImageSlider';
 import { SliderData } from './Components/ImageSlider/SliderData';
+
+import Skeleton from '@mui/material/Skeleton';
+
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -30,13 +34,13 @@ const useStyles = makeStyles({
 		/* float: 'center',
 		textAlign: 'center', */
 		width: '100px',
-		height: '250px'
+		height: '250px',
+
 	},
 	titulo: {
-		color: 'red',
-		marginTop: "5%"/* ,
-		textAlign: 'center' */
-
+		color: 'orange',
+		marginTop: "5%",
+		textAlign: 'center'
 	},
 	div: {
 		textAlign: 'center'
@@ -55,8 +59,14 @@ export default function BasicCard() {
 		setDados(data)
 	}, [])
 
+	const MyDiv = styled(Box)({
+		backgroundColor: '#fffef6',
+		opacity: 1,
+		backgroundImage: 'repeating-radial-gradient( circle at 0 0, transparent 0, #fffef6 40px ), repeating-linear-gradient( #ffecbb55, #ffecbb )',
+	});
+
 	return (
-		<div className={classes.div}>
+		<div className={classes.div} >
 			<div>
 				<img src={img1} style={{
 					marginTop: '-50px', float: 'top',
@@ -67,29 +77,32 @@ export default function BasicCard() {
 				<img src={letreiro} style={{
 					marginTop: '-50px', position: 'absolute',
 					left: '50%',
-					/* marginLeft: '50%',
-					marginRight: 'auto', */
-					top: '27%',
+					top: '25%',
 					width: '25%',
 					minWidth: '150px',
 					transform: 'translate(-50%, -50%)'/* , float: 'top' */
 				}} />
 			</div>
 
-			<h1 className={classes.titulo} >Comunicados Importantes</h1>
-			{dados &&
-				dados.map((obj, index) => {
-					console.log(dados)
-					return (
-						<Accordion defaultExpanded={true} key={index}>
-							<AccordionSummary expandIcon={<ExpandMoreIcon />}>
-								<Typography className={classes.assunto}><b>{Object.values(obj)[2]}</b></Typography>
-							</AccordionSummary>
-							<AccordionDetails><Typography>{Object.values(obj)[3]}</Typography></AccordionDetails>
-						</Accordion>
-					)
-				})
-			}
-		</div>
+			<MyDiv style={{
+				maxWidth: '650px', marginLeft: 'auto', marginRight: 'auto',
+				borderTopLeftRadius: '10px', borderTopRightRadius: '10px'
+			}}>
+				<h1 className={classes.titulo}>Comunicados Importantes</h1>
+				{dados &&
+					dados.map((obj, index) => {
+						console.log(dados)
+						return (
+							<Accordion defaultExpanded={true} key={index}>
+								<AccordionSummary expandIcon={<ExpandMoreIcon />}>
+									<Typography className={classes.assunto}><b>{Object.values(obj)[2]}</b></Typography>
+								</AccordionSummary>
+								<AccordionDetails><Typography>{Object.values(obj)[3]}</Typography></AccordionDetails>
+							</Accordion>
+						)
+					})
+				}
+			</MyDiv>
+		</div >
 	)
 }

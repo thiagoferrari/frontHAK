@@ -23,6 +23,8 @@ import { InputLabel } from '@mui/material'
 import OutlinedInput from '@mui/material/OutlinedInput';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 
+import ADMAcessoList from './AreaADM/ADMAcessoList'
+
 const useStyles = makeStyles((theme) => ({
 	form: {
 		maxWidth: '100%',
@@ -54,163 +56,172 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function ADMLoginForm() {
-	const classes = useStyles()
 
-	const [title, setTitle] = useState('Digite seu Login')
-
-	const [dialogOpen, setDialogOpen] = useState(false) // O diálogo de confirmação de voltar está aberto?
-
-	// Estados de Snackbar:
-	const [sbOpen, setSbOpen] = useState(false)
-	const [sbSeverity, setSbSeverity] = useState('')
-	const [sbMessage, setSbMessage] = useState('')
-
-	function handleDialogClose(result) {
-		setDialogOpen(false) // Fecha o diálogo de confirmação
-
-		if (result) tryRecovery()
-		else history.push('/app-login')
-	}
+	const getItem = (key, value) => { return window.localStorage.getItem(key, value) }
+	const setItem = (key, value) => { return window.localStorage.setItem(key, value) }
 
 	const history = useHistory()
 	const params = useParams()
 
-	const [form, setForm] = useState({ stConectado: false, tryRec: true })
-	const [showPassword, setShowPassword] = useState(false);
+	if (getItem('stConectado')) {
+		console.log('stConectado')
+		history.push('/Login')
+		return <ADMAcessoList />
+		
+		////window.location.href = '/Login'
 
-	/* function handleSbClose() {
-		setSbOpen(false)    // Fecha a snackbar
-	} */
+	} else {
+		const classes = useStyles()
 
-	async function tryRecovery() {
-		try {
-			await axios.post('http://localhost:3333/Entrar', form)
+		const [title, setTitle] = useState('Digite seu Login')
 
-			setSbOpen(true)
-			setSbSeverity('success')
-			setSbMessage('Um lembrete de senha foi enviado ao seu e-mail cadastrado como recuperação.')
+		const [dialogOpen, setDialogOpen] = useState(false) // O diálogo de confirmação de voltar está aberto?
+
+		// Estados de Snackbar:
+		const [sbOpen, setSbOpen] = useState(false)
+		const [sbSeverity, setSbSeverity] = useState('')
+		const [sbMessage, setSbMessage] = useState('')
+
+		function handleDialogClose(result) {
+			setDialogOpen(false) // Fecha o diálogo de confirmação
+
+			if (result) tryRecovery()
+			else history.push('/app-login')
 		}
-		catch (error) {
-			console.error(error)
-			setSbOpen(true)
-			setSbSeverity('error')
-			setSbMessage('Login não existente ou inativado')
-		}
-		setTimeout(() => { setSbOpen(false) }, 5000)
-	}
 
-	async function tryLogin() {
+		const [form, setForm] = useState({ stConectado: false, tryRec: true })
+		const [showPassword, setShowPassword] = useState(false);
 
-		/* var { setItem } = window.localStorage
-		var { clear } = window.localStorage */
+		/* function handleSbClose() {
+			setSbOpen(false)    // Fecha a snackbar
+		} */
 
-		try {
-			setForm({ ...form, tryRec: false }) // Desabilita rec. de senha
+		async function tryRecovery() {
+			try {
+				await axios.post('http://localhost:3333/Entrar', form)
 
-			console.log(form)
-
-			await axios.post('http://localhost:3333/Entrar', form)
-
-			/* if (form.stConectado) setItem('stConectado', true)
-			else clear(); */
-
-			/* form.stConectado ? window.localStorage.setItem('stConectado', true) : window.localStorage.clear() */
-
-			history.push('/Login')
-		}
-		catch (error) {
-			console.error(error)
-			setSbOpen(true)
-			setSbSeverity('error')
-			setSbMessage('Login não existente ou inativado')
+				setSbOpen(true)
+				setSbSeverity('success')
+				setSbMessage('Um lembrete de senha foi enviado ao seu e-mail cadastrado como recuperação.')
+			}
+			catch (error) {
+				console.error(error)
+				setSbOpen(true)
+				setSbSeverity('error')
+				setSbMessage('Login não existente ou inativado')
+			}
 			setTimeout(() => { setSbOpen(false) }, 5000)
 		}
-	}
 
-	function handleSubmit(event) {
-		event.preventDefault() // Evita o recarregamento da página
-		tryLogin()
-	}
+		async function tryLogin() {
+			try {
+				setForm({ ...form, tryRec: false }) // Desabilita rec. de senha
 
-	function handleChange({ target }) {
-		const { id, value } = target
-		setForm({ ...form, [id]: value })
-		/* esse [id] recebe o id do input */
-	}
+				await axios.post('http://localhost:3333/Entrar', form)
 
-	return (
-		<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+				setItem('dsLogin', form.dsLogin)
+				if (form.stConectado) setItem('stConectado', true)
 
-			<ConfirmDialog isOpen={dialogOpen} onClose={handleDialogClose} color="secondary">
-				<TextField
-					id="dsLogin" InputLabelProps={{ shrink: true }}
-					label="Digite seu Login"
-					value={form.dsLogin} variant="outlined"
-					onChange={handleChange} color="secondary"
-					required fullWidth
-				/>
-			</ConfirmDialog>
+				//form.stConectado ? setItem('stConectado', true) : window.localStorage.clear('stConectado', true)
 
-			<Snackbar open={sbOpen} autoHideDuration={6000} color="secondary">
-				<MuiAlert elevation={6} variant="filled" severity={sbSeverity}>
-					{sbMessage}
-				</MuiAlert>
-			</Snackbar>
+				history.push('/Login')
+			}
+			catch (error) {
+				console.error(error)
+				setSbOpen(true)
+				setSbSeverity('error')
+				setSbMessage('Login não existente ou inativado')
+				setTimeout(() => { setSbOpen(false) }, 5000)
+			}
+		}
 
-			<h1>{title}</h1>
-			<form className={classes.form} onSubmit={handleSubmit}>
+		function handleSubmit(event) {
+			event.preventDefault() // Evita o recarregamento da página
+			tryLogin()
+		}
 
-				<TextField
-					id="dsLogin" InputLabelProps={{ shrink: true }}
-					label="Login"
-					value={form.dsLogin} variant="outlined"
-					onChange={handleChange} color="secondary"
-					required
-				/>
+		function handleChange({ target }) {
+			console.log(form)
 
-				<br />
+			const { id, value } = target
+			setForm({ ...form, [id]: value })
+			/* esse [id] recebe o id do input */
+		}
 
-				<TextField
-					id="dsSenha"
-					InputLabelProps={{ shrink: true }}
-					label="Senha" variant="outlined"
-					color="secondary" value={form.dsSenha}
-					onChange={handleChange}
-					type={showPassword ? "text" : "password"}
-					required
-				/>
-				<IconButton
-					onClick={() => setShowPassword(!showPassword)}
-					onMouseDown={() => setShowPassword(!showPassword)}
-				>
-					{showPassword ? <Visibility /> : <VisibilityOff />}
-				</IconButton>
+		return (
+			<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
 
-
-				{/* <FormControl className={classes.checkbox} fullWidth>
-					<FormControlLabel required={true}
-						control={<Checkbox id="stConectado"
-							checked={(form.stConectado ? true : false)}
-							onChange={e => (
-								(setForm({ ...form, stConectado: (e.target.checked) }))
-							)}
-						/>}
-						label="Permanecer Conectado?"
+				<ConfirmDialog isOpen={dialogOpen} onClose={handleDialogClose} color="secondary">
+					<TextField
+						id="dsLogin" InputLabelProps={{ shrink: true }}
+						label="Digite seu Login"
+						value={form.dsLogin} variant="outlined"
+						onChange={handleChange} color="secondary"
+						required fullWidth
 					/>
-				</FormControl> */}
+				</ConfirmDialog>
 
-				<Toolbar className={classes.toolbar}>
-					<Button variant="contained" color="secondary" type="submit">
-						Entrar
-					</Button>
-				</Toolbar>
-				<Toolbar className={classes.toolbar}>
-					<Button variant="contained"
-						onClick={() => setDialogOpen(true)}>
-						Esqueci Senha
-					</Button>
-				</Toolbar>
-			</form>
-		</div>
-	)
+				<Snackbar open={sbOpen} autoHideDuration={6000} color="secondary">
+					<MuiAlert elevation={6} variant="filled" severity={sbSeverity}>
+						{sbMessage}
+					</MuiAlert>
+				</Snackbar>
+
+				<h1>{title}</h1>
+				<form className={classes.form} onSubmit={handleSubmit}>
+
+					<TextField
+						id="dsLogin" InputLabelProps={{ shrink: true }}
+						label="Login"
+						value={form.dsLogin} variant="outlined"
+						onChange={handleChange} color="secondary"
+						required
+					/>
+
+					<br />
+
+					<TextField
+						id="dsSenha"
+						InputLabelProps={{ shrink: true }}
+						label="Senha" variant="outlined"
+						color="secondary" value={form.dsSenha}
+						onChange={handleChange}
+						type={showPassword ? "text" : "password"}
+						required
+					/>
+					<IconButton
+						onClick={() => setShowPassword(!showPassword)}
+						onMouseDown={() => setShowPassword(!showPassword)}
+					>
+						{showPassword ? <Visibility /> : <VisibilityOff />}
+					</IconButton>
+
+
+					{<FormControl className={classes.checkbox} fullWidth>
+						<FormControlLabel required={true}
+							control={<Checkbox id="stConectado"
+								checked={(form.stConectado ? true : false)}
+								onChange={e => (
+									(setForm({ ...form, stConectado: (e.target.checked) }))
+								)}
+							/>}
+							label="Permanecer Conectado?"
+						/>
+					</FormControl>}
+
+					<Toolbar className={classes.toolbar}>
+						<Button variant="contained" color="secondary" type="submit">
+							Entrar
+						</Button>
+					</Toolbar>
+					<Toolbar className={classes.toolbar}>
+						<Button variant="contained"
+							onClick={() => setDialogOpen(true)}>
+							Esqueci Senha
+						</Button>
+					</Toolbar>
+				</form>
+			</div>
+		)
+	}
 }
