@@ -224,16 +224,17 @@ export default function (props) {
 					</ListItem>
 				</Link>
 
-				<Link to='/' style={{ textDecoration: 'none', color: 'black' }}>
-					<ListItem button onClick={() => localStorage.clear()}>
-						<ListItemIcon>
-							<KeyboardBackspaceIcon />
-						</ListItemIcon>
-						<ListItemText primary={<>Fazer logoff
-							<br /><i> -{getItem('dsLogin')}- </i></>} />
-					</ListItem>
-				</Link>
-
+				{getItem('stConectado') &&
+					<Link to='/' style={{ textDecoration: 'none', color: 'black' }}>
+						<ListItem button onClick={() => localStorage.clear()}>
+							<ListItemIcon>
+								<KeyboardBackspaceIcon />
+							</ListItemIcon>
+							<ListItemText primary={<>Fazer logoff
+								<br /><i> -{getItem('dsLogin')}- </i></>} />
+						</ListItem>
+					</Link>
+				}
 			</Drawer>
 			<Box sx={{ flexGrow: 1, p: 3, marginY: '5%' }}>
 				{props.corpo}
