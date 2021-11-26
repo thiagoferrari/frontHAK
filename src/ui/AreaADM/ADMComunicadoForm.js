@@ -7,6 +7,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Checkbox from '@material-ui/core/Checkbox'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import Toolbar from '@material-ui/core/Toolbar'
+import Tooltip from '@mui/material/Tooltip';
 import Button from '@material-ui/core/Button'
 import axios from 'axios'
 import Snackbar from '@material-ui/core/Snackbar';
@@ -17,6 +18,9 @@ import Select from '@material-ui/core/Select'
 import { InputLabel } from '@mui/material'
 import OutlinedInput from '@mui/material/OutlinedInput';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
+
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
+import ArticleIcon from '@mui/icons-material/Article';
 
 const useStyles = makeStyles((theme) => ({
 	form: {
@@ -49,7 +53,11 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function ADMComunicadoForm() {
+
 	const classes = useStyles()
+
+	const [img, setImg] = useState()
+	const [doc, setDoc] = useState()
 
 	const [title, setTitle] = useState('Cadastrar Novo Comunicado')
 
@@ -70,7 +78,7 @@ export default function ADMComunicadoForm() {
 	const history = useHistory()
 	const params = useParams()
 
-	const [form, setForm] = useState({ stAtivo: true })
+	const [form, setForm] = useState({ stAtivo: true, stPublico: true })
 
 	useEffect(async () => {
 		// Verifica se tem o parâmetro id na rota. Se tiver, temos que buscar
@@ -79,6 +87,7 @@ export default function ADMComunicadoForm() {
 			setTitle('Editando Comunicado')
 			//console.log(params.id)
 			getData(params.id)
+			setForm({ ...form })
 		}
 
 	}, [])
@@ -121,8 +130,10 @@ export default function ADMComunicadoForm() {
 		}
 	}
 
-	function handleSubmit(event) {
-		event.preventDefault() // Evita o recarregamento da página
+	async function handleSubmit(e) {
+		e.preventDefault() // Evita o recarregamento da página
+
+		await handleAnexo()
 		saveData()
 	}
 
@@ -130,6 +141,28 @@ export default function ADMComunicadoForm() {
 		const { id, value } = target
 		setForm({ ...form, [id]: value })
 		/* esse [id] recebe o id do input */
+	}
+
+	async function handleAnexo() {
+
+		async function storeAnexoidImg(estado) {
+			var file = new FormData()
+			file.append('anexo', estado)
+
+			let { data } = await axios.post('http://localhost:3333/Anexo', file)
+			setForm({ ...form, idImg: data.id })
+		}
+
+		async function storeAnexoidDoc(estado) {
+			var file = new FormData()
+			file.append('anexo', estado)
+
+			let { data } = await axios.post('http://localhost:3333/Anexo', file)
+			setForm({ ...form, idDoc: data.id })
+		}
+
+		img ? storeAnexoidImg(img) : null
+		doc ? storeAnexoidDoc(doc) : null
 	}
 
 	return (
@@ -176,6 +209,22 @@ export default function ADMComunicadoForm() {
 					/>
 				</FormControl>
 
+				<div>
+					<Tooltip title="Anexar Documento ao Comunicado">
+						<label htmlFor="idDocf" style={{ marginRight: '10px' }}>
+							<input style={{ display: 'none' }} id='idDocf' type='file' onChange={(e) => (setDoc(e.target.files[0]))} />
+							<Button variant="contained" component="span"><ArticleIcon /></Button>
+						</label>
+					</Tooltip>
+
+					<Tooltip title="Anexar Imagem ao Comunicado">
+						<label htmlFor="idImgf">
+							<input style={{ display: 'none' }} id='idImgf' type='file' onChange={(e) => (setImg(e.target.files[0]))} />
+							<Button variant="contained" component="span"><AddPhotoAlternateIcon /></Button>
+						</label>
+					</Tooltip>
+				</div>
+
 				<Toolbar className={classes.toolbar}>
 					<Button variant="contained" color="secondary" type="submit">
 						Enviar
@@ -187,6 +236,9 @@ export default function ADMComunicadoForm() {
 					</Button>
 				</Toolbar>
 			</form>
+
+
+
 		</div >
 	)
 }

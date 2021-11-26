@@ -6,6 +6,7 @@ import FormControl from '@material-ui/core/FormControl'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Checkbox from '@material-ui/core/Checkbox'
 import InputAdornment from '@material-ui/core/InputAdornment'
+import Input from '@material-ui/core/Input'
 import Toolbar from '@material-ui/core/Toolbar'
 import Button from '@material-ui/core/Button'
 import axios from 'axios'
@@ -49,6 +50,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function ADMColaboradorForm() {
+
 	const classes = useStyles()
 
 	const [title, setTitle] = useState('Cadastrar Novo Colaborador')
@@ -72,7 +74,7 @@ export default function ADMColaboradorForm() {
 
 	const [setores, setSetores] = useState()
 
-	const [form, setForm] = useState({stAtivo: true})
+	const [form, setForm] = useState({ stAtivo: true })
 
 	useEffect(async () => {
 		// Verifica se tem o parâmetro id na rota. Se tiver, temos que buscar

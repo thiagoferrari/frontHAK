@@ -10,6 +10,7 @@ import { makeStyles } from '@mui/styles';
 import Carousel from 'react-material-ui-carousel';
 import ImageSlider from './Components/ImageSlider/ImageSlider';
 import { SliderData } from './Components/ImageSlider/SliderData';
+import Input from '@mui/material/Input';
 
 import Skeleton from '@mui/material/Skeleton';
 
