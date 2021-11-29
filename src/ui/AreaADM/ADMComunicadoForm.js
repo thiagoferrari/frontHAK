@@ -56,8 +56,8 @@ export default function ADMComunicadoForm() {
 
 	const classes = useStyles()
 
-	const [img, setImg] = useState()
-	const [doc, setDoc] = useState()
+	const [img, setImg] = useState(null)
+	const [doc, setDoc] = useState(null)
 
 	const [title, setTitle] = useState('Cadastrar Novo Comunicado')
 
@@ -78,7 +78,7 @@ export default function ADMComunicadoForm() {
 	const history = useHistory()
 	const params = useParams()
 
-	const [form, setForm] = useState({ stAtivo: true, stPublico: true })
+	let [form, setForm] = useState({ stAtivo: true })
 
 	useEffect(async () => {
 		// Verifica se tem o parâmetro id na rota. Se tiver, temos que buscar
@@ -134,13 +134,27 @@ export default function ADMComunicadoForm() {
 		e.preventDefault() // Evita o recarregamento da página
 
 		await handleAnexo()
-		saveData()
+		await saveData()
 	}
 
 	function handleChange({ target }) {
 		const { id, value } = target
 		setForm({ ...form, [id]: value })
 		/* esse [id] recebe o id do input */
+	}
+	let teste1
+
+	async function storeAnexoidDoc(estado) {
+		var file = new FormData()
+		file.append('anexo', estado)
+
+		await axios.post('http://localhost:3333/Anexo', file)
+			.then(({ data }) => teste1 = data.id)
+			.finally(() => { console.log('finally') })
+
+		//await console.log(data.id)
+		await setForm(form.idDoc = teste1)
+		debugger
 	}
 
 	async function handleAnexo() {
@@ -153,16 +167,16 @@ export default function ADMComunicadoForm() {
 			setForm({ ...form, idImg: data.id })
 		}
 
-		async function storeAnexoidDoc(estado) {
-			var file = new FormData()
-			file.append('anexo', estado)
+		if (img !== null) await storeAnexoidImg(img)
+		if (doc !== null) await storeAnexoidDoc(doc)
 
-			let { data } = await axios.post('http://localhost:3333/Anexo', file)
-			setForm({ ...form, idDoc: data.id })
-		}
+		//await console.log('form :>> ', form);
 
-		img ? storeAnexoidImg(img) : null
-		doc ? storeAnexoidDoc(doc) : null
+		/* await console.log('img')
+		await console.log(img)
+		
+		await console.log('doc')
+		await console.log(doc) */
 	}
 
 	return (
@@ -212,7 +226,14 @@ export default function ADMComunicadoForm() {
 				<div>
 					<Tooltip title="Anexar Documento ao Comunicado">
 						<label htmlFor="idDocf" style={{ marginRight: '10px' }}>
-							<input style={{ display: 'none' }} id='idDocf' type='file' onChange={(e) => (setDoc(e.target.files[0]))} />
+							<input style={{ display: 'none' }} id='idDocf' type='file'
+								onChange={(e) => {
+									setDoc(e.target.files[0])
+									/* console.log('doc :>> ', )
+									console.log('doc :>> ', doc) */
+									debugger
+									storeAnexoidDoc(e.target.files[0])
+								}} />
 							<Button variant="contained" component="span"><ArticleIcon /></Button>
 						</label>
 					</Tooltip>
