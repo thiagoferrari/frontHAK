@@ -132,8 +132,6 @@ export default function ADMComunicadoForm() {
 
 	async function handleSubmit(e) {
 		e.preventDefault() // Evita o recarregamento da página
-
-		await handleAnexo()
 		await saveData()
 	}
 
@@ -144,22 +142,23 @@ export default function ADMComunicadoForm() {
 	}
 	let teste1
 
-	async function storeAnexoidDoc(estado) {
+	async function saveAnexo(anexo) {
+
+		const { files } = anexo
+		const { id: idInput } = anexo
+
 		var file = new FormData()
-		file.append('anexo', estado)
+		file.append('anexo', files[0])
 
 		await axios.post('http://localhost:3333/Anexo', file)
-			.then(({ data }) => teste1 = data.id)
-			.finally(() => { console.log('finally') })
-
-		//await console.log(data.id)
-		await setForm(form.idDoc = teste1)
-		debugger
+			.then(({ data: { id } }) => setForm({ ...form, idInput: id }))
 	}
 
-	async function handleAnexo() {
+	/* async function handleAnexo() {
 
 		async function storeAnexoidImg(estado) {
+
+
 			var file = new FormData()
 			file.append('anexo', estado)
 
@@ -176,8 +175,8 @@ export default function ADMComunicadoForm() {
 		await console.log(img)
 		
 		await console.log('doc')
-		await console.log(doc) */
-	}
+		await console.log(doc) 
+	} */
 
 	return (
 		<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -225,23 +224,22 @@ export default function ADMComunicadoForm() {
 
 				<div>
 					<Tooltip title="Anexar Documento ao Comunicado">
-						<label htmlFor="idDocf" style={{ marginRight: '10px' }}>
-							<input style={{ display: 'none' }} id='idDocf' type='file'
-								onChange={(e) => {
-									setDoc(e.target.files[0])
-									/* console.log('doc :>> ', )
-									console.log('doc :>> ', doc) */
-									debugger
-									storeAnexoidDoc(e.target.files[0])
-								}} />
-							<Button variant="contained" component="span"><ArticleIcon /></Button>
+						<label htmlFor="idDoc" style={{ marginRight: '10px' }}>
+							<input style={{ display: 'none' }} id='idDoc' type='file'
+								onChange={(e) => { saveAnexo(e.target) }} />
+							<Button variant="contained" component="span">
+								<ArticleIcon />
+							</Button>
 						</label>
 					</Tooltip>
 
 					<Tooltip title="Anexar Imagem ao Comunicado">
-						<label htmlFor="idImgf">
-							<input style={{ display: 'none' }} id='idImgf' type='file' onChange={(e) => (setImg(e.target.files[0]))} />
-							<Button variant="contained" component="span"><AddPhotoAlternateIcon /></Button>
+						<label htmlFor="idImg">
+							<input style={{ display: 'none' }} id='idImg' type='file'
+								onChange={(e) => { saveAnexo(e.target) }} />
+							<Button variant="contained" component="span">
+								<AddPhotoAlternateIcon />
+							</Button>
 						</label>
 					</Tooltip>
 				</div>

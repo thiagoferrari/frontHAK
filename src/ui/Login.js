@@ -67,7 +67,7 @@ export default function ADMLoginForm() {
 		console.log('stConectado')
 		history.push('/Login')
 		return <ADMAcessoList />
-		
+
 		////window.location.href = '/Login'
 
 	} else {
