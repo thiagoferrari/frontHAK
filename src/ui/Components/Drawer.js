@@ -5,6 +5,8 @@ import Drawer from "@material-ui/core/Drawer";
 import Box from '@mui/material/Box';
 import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBar from "@material-ui/core/AppBar";
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import Menu from '@material-ui/core/Menu';
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import List from "@material-ui/core/List";
@@ -14,13 +16,34 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
-import MenuIcon from "@material-ui/icons/Menu";
+import FormGroup from '@material-ui/core/FormGroup';
+import MenuItem from '@material-ui/core/MenuItem';
+import MenuIcon from '@material-ui/icons/Menu';
+
 import { Link } from "react-router-dom";
 
 import PodcastCard from "./PodcastCard";
 
+import letreirodeutro from '../../img/Carousel/letreirodeutro.png'
+import letreiroprotan from '../../img/Carousel/letreiroprotan.png'
+import letreirotritano from '../../img/Carousel/letreirotritano.png'
 import logo from '../../img/logo.png'
+
+let logoImg
+switch (localStorage.getItem('bkgCorrection')) {
+	case 'deutro':
+		logoImg = letreirodeutro
+		break;
+	case 'protan':
+		logoImg = letreiroprotan
+		break;
+	case 'tritano':
+		logoImg = letreirotritano
+		break;
+	default:
+		logoImg = logo
+		break;
+}
 
 import HomeIcon from '@mui/icons-material/Home'; //Página Inicial
 import LightbulbIcon from '@mui/icons-material/Lightbulb'; //Sugestões
@@ -45,7 +68,7 @@ const drawerWidth = 280;
 const useStyles = makeStyles(theme => ({
 	root: {
 		display: "flex",
-
+		flexGrow: 1,
 	},
 	appBar: {
 		zIndex: theme.zIndex.drawer + 1,
@@ -63,6 +86,9 @@ const useStyles = makeStyles(theme => ({
 		[theme.breakpoints.up("md")]: {
 			display: "none"
 		}
+	},
+	eyeButton: {
+		marginRight: theme.spacing(2),
 	},
 	toolbar: {
 		...theme.mixins.toolbar,
@@ -88,6 +114,24 @@ export default function (props) {
 	const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
 
 	const [open, setOpen] = React.useState(false);
+
+	const [auth, setAuth] = React.useState(true);
+	const [anchorEl, setAnchorEl] = React.useState(null);
+	const openEye = Boolean(anchorEl);
+
+	const handleEye = (bkgCorrection) => {
+		localStorage.setItem('bkgCorrection', bkgCorrection);
+		//reload page
+		window.location.reload();
+	};
+
+	const handleMenu = (event) => {
+		setAnchorEl(event.currentTarget);
+	};
+
+	const handleClose = () => {
+		setAnchorEl(null);
+	};
 
 	const toggleDrawer = event => {
 		if (
@@ -115,8 +159,39 @@ export default function (props) {
 						<MenuIcon />
 					</IconButton>
 					<div className={classes.logoHorizontallyCenter}>
-						<img src={logo} className={classes.logo} />
+						<img src={logoImgy} className={classes.logo} />
 					</div>
+
+					{auth && (
+						<div>
+							<IconButton
+								onClick={handleMenu}
+								color="inherit"
+							>
+								<VisibilityIcon />
+							</IconButton>
+							<Menu
+								id="menu-appbar"
+								anchorEl={anchorEl}
+								anchorOrigin={{
+									vertical: 'top',
+									horizontal: 'right',
+								}}
+								keepMounted
+								transformOrigin={{
+									vertical: 'top',
+									horizontal: 'right',
+								}}
+								open={openEye}
+								onClose={handleClose}
+							>
+								<MenuItem disabled><b>Acessibilidade</b></MenuItem>
+								<MenuItem onClick={() => handleEye('protan')}>Protanopia</MenuItem>
+								<MenuItem onClick={() => handleEye('deutro')}>Deuteranopia</MenuItem>
+								<MenuItem onClick={() => handleEye('tritano')}>Tritanopia</MenuItem>
+							</Menu>
+						</div>
+					)}
 				</Toolbar>
 			</AppBar>
 			<Drawer
@@ -251,7 +326,7 @@ export default function (props) {
 					</ListItem>
 				</Link>
 
-				<PodcastCard sx={{maxWidth: '90%'}} />
+				<PodcastCard sx={{ maxWidth: '90%' }} />
 			</Drawer>
 			<Box sx={{ flexGrow: 1, p: 3, marginY: '5%' }}>
 				{props.corpo}

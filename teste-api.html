@@ -17,9 +17,9 @@
 
 	async function getData() {
 		try {
-			let response = await axios.get('http://192.168.1.196:3333/Colaboradores')
+			let response = await axios.get('http://localhost:3333/Colaboradores')
 
-			//let response = await fetch('http://192.168.1.196:3333/Colaboradores'/* , { mode: 'no-cors' } */)
+			//let response = await fetch('http://localhost:3333/Colaboradores'/* , { mode: 'no-cors' } */)
 
 			console.log('response :>> ', response.data);
 		}

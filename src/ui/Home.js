@@ -20,7 +20,11 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-import img1 from '../img/Carousel/Imagem2.png'
+import Imagem from '../img/Carousel/Imagem2.png'
+import Imagemdeutro from '../img/Carousel/Imagem2deutro.png'
+import Imagemprotan from '../img/Carousel/Imagem2protan.png'
+import Imagemtritano from '../img/Carousel/Imagem2tritano.png'
+
 import letreiro from '../img/Carousel/letreiro.png'
 
 import axios from 'axios';
@@ -36,7 +40,6 @@ const useStyles = makeStyles({
 		textAlign: 'center', */
 		width: '100px',
 		height: '250px',
-
 	},
 	titulo: {
 		color: 'orange',
@@ -46,30 +49,45 @@ const useStyles = makeStyles({
 	div: {
 		textAlign: 'center'
 	}
-
 });
 
 export default function BasicCard() {
 
-	const classes = useStyles();
+	let bkgCorrection = localStorage.getItem('bkgCorrection')
+
+	switch (bkgCorrection) {
+		case 'deutro':
+			bkgCorrection = Imagemdeutro
+			break;
+		case 'protan':
+			bkgCorrection = Imagemprotan
+			break;
+		case 'tritano':
+			bkgCorrection = Imagemtritano
+			break;
+		default:
+			bkgCorrection = Imagem2
+			break;
+	}
+
+	const classes = useStyles()
 
 	const [dados, setDados] = React.useState(null)
 
 	React.useEffect(async () => {
-		let { data } = await axios.get('http://192.168.1.196:3333/Comunicado')
+		let { data } = await axios.get('http://localhost:3333/Comunicado')
 		setDados(data)
 	}, [])
 
 	const MyDiv = styled(Box)({
-		backgroundColor: '#fffef6',
-		opacity: 1,
+		backgroundColor: '#fffef6', opacity: 1,
 		backgroundImage: 'repeating-radial-gradient( circle at 0 0, transparent 0, #fffef6 40px ), repeating-linear-gradient( #ffecbb55, #ffecbb )',
 	});
 
 	return (
 		<div className={classes.div} >
 			<div>
-				<img src={img1} style={{
+				<img src={bkgCorrection} style={{
 					marginTop: '-50px', float: 'top',
 					width: '100%', maxWidth: '800px',
 					borderBottomLeftRadius: `15px`,
