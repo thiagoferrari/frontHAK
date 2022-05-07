@@ -24,26 +24,7 @@ import { Link } from "react-router-dom";
 
 import PodcastCard from "./PodcastCard";
 
-import letreirodeutro from '../../img/Carousel/letreirodeutro.png'
-import letreiroprotan from '../../img/Carousel/letreiroprotan.png'
-import letreirotritano from '../../img/Carousel/letreirotritano.png'
 import logo from '../../img/logo.png'
-
-let logoImg
-switch (localStorage.getItem('bkgCorrection')) {
-	case 'deutro':
-		logoImg = letreirodeutro
-		break;
-	case 'protan':
-		logoImg = letreiroprotan
-		break;
-	case 'tritano':
-		logoImg = letreirotritano
-		break;
-	default:
-		logoImg = logo
-		break;
-}
 
 import HomeIcon from '@mui/icons-material/Home'; //Página Inicial
 import LightbulbIcon from '@mui/icons-material/Lightbulb'; //Sugestões
@@ -159,7 +140,7 @@ export default function (props) {
 						<MenuIcon />
 					</IconButton>
 					<div className={classes.logoHorizontallyCenter}>
-						<img src={logoImgy} className={classes.logo} />
+						<img src={logo} className={classes.logo} />
 					</div>
 
 					{auth && (
@@ -189,6 +170,8 @@ export default function (props) {
 								<MenuItem onClick={() => handleEye('protan')}>Protanopia</MenuItem>
 								<MenuItem onClick={() => handleEye('deutro')}>Deuteranopia</MenuItem>
 								<MenuItem onClick={() => handleEye('tritano')}>Tritanopia</MenuItem>
+								<Divider />
+								<MenuItem onClick={() => handleEye('default')}>Sem Correções</MenuItem>
 							</Menu>
 						</div>
 					)}
@@ -210,7 +193,7 @@ export default function (props) {
 
 				<Link to='/' style={{ textDecoration: 'none', color: 'black' }}>
 					<ListItem button onClick={() => setOpen(!open)}>
-						<ListItemIcon>
+						<ListItemIcon aria-label="Página Inicial">
 							<HomeIcon />
 						</ListItemIcon>
 						<ListItemText primary={'Página Inicial'} />
@@ -219,7 +202,7 @@ export default function (props) {
 
 				<Link to='/app-sugestoes' style={{ textDecoration: 'none', color: 'black' }}>
 					<ListItem button onClick={() => setOpen(!open)}>
-						<ListItemIcon>
+						<ListItemIcon aria-label="Sugestões">
 							<LightbulbIcon />
 						</ListItemIcon>
 						<ListItemText primary={'Sugestões'} />
@@ -230,7 +213,7 @@ export default function (props) {
 
 				<Link to='/app-empresas' style={{ textDecoration: 'none', color: 'black' }}>
 					<ListItem button onClick={() => setOpen(!open)}>
-						<ListItemIcon>
+						<ListItemIcon aria-label="Empresas">
 							<InfoIcon />
 						</ListItemIcon>
 						<ListItemText primary={'Dados da Empresa'} />
@@ -239,7 +222,7 @@ export default function (props) {
 
 				<Link to='/app-ramais' style={{ textDecoration: 'none', color: 'black' }}>
 					<ListItem button onClick={() => setOpen(!open)}>
-						<ListItemIcon>
+						<ListItemIcon aria-label="Ramais">
 							<AddIcCallIcon />
 						</ListItemIcon>
 						<ListItemText primary={'Lista de Ramais'} />
@@ -248,7 +231,7 @@ export default function (props) {
 
 				<Link to='/app-emails' style={{ textDecoration: 'none', color: 'black' }}>
 					<ListItem button onClick={() => setOpen(!open)}>
-						<ListItemIcon>
+						<ListItemIcon aria-label="E-mails">
 							<AlternateEmailIcon />
 						</ListItemIcon>
 						<ListItemText primary={'Lista de Emails/Colab.'} />
@@ -257,7 +240,7 @@ export default function (props) {
 
 				<Link to='/app-politicas' style={{ textDecoration: 'none', color: 'black' }}>
 					<ListItem button onClick={() => setOpen(!open)}>
-						<ListItemIcon>
+						<ListItemIcon aria-label="Políticas">
 							<LocalPoliceIcon />
 						</ListItemIcon>
 						<ListItemText primary={'Políticas/Regras Internas'} />
@@ -266,7 +249,7 @@ export default function (props) {
 
 				<Link to='/app-pabx' style={{ textDecoration: 'none', color: 'black' }}>
 					<ListItem button onClick={() => setOpen(!open)}>
-						<ListItemIcon>
+						<ListItemIcon aria-label="PABX">
 							<DialerSipIcon />
 						</ListItemIcon>
 						<ListItemText primary={'Operações do PABX'} />
@@ -278,7 +261,7 @@ export default function (props) {
 				<a onClick={() => { window.open('http://refeicao.feak.local/#!/') }}
 					style={{ textDecoration: 'none', color: 'black', cursor: 'alias' }}>
 					<ListItem>
-						<ListItemIcon>
+						<ListItemIcon aria-label="Refeição">
 							<FoodBankIcon />
 						</ListItemIcon>
 						<ListItemText primary={'Portal de Refeições'} />
@@ -288,7 +271,7 @@ export default function (props) {
 				<a onClick={() => { window.open('http://ponto.feak.local/#!/') }}
 					style={{ textDecoration: 'none', color: 'black', cursor: 'alias' }}>
 					<ListItem >
-						<ListItemIcon>
+						<ListItemIcon aria-label="Ponto">
 							<WatchLaterIcon />
 						</ListItemIcon>
 						<ListItemText primary={'Ocorrência de Ponto'} />
@@ -298,7 +281,7 @@ export default function (props) {
 				<a onClick={() => { window.open('http://acidente.feak.local/#!/') }}
 					style={{ textDecoration: 'none', color: 'black', cursor: 'alias' }}>
 					<ListItem >
-						<ListItemIcon>
+						<ListItemIcon aria-label="Acidentes">
 							<NewReleasesIcon />
 						</ListItemIcon>
 						<ListItemText primary={'Ocorrência de Acidente'} />
@@ -308,7 +291,7 @@ export default function (props) {
 				<a onClick={() => { window.open('http://gestaopessoas.feak.local/#!/') }}
 					style={{ textDecoration: 'none', color: 'black', cursor: 'alias' }}>
 					<ListItem >
-						<ListItemIcon>
+						<ListItemIcon aria-label="Gestão de Pessoas">
 							<AssignmentIndIcon />
 						</ListItemIcon>
 						<ListItemText primary={'Gestão de Pessoas'} />
@@ -319,7 +302,7 @@ export default function (props) {
 
 				<Link to='/app-login' style={{ textDecoration: 'none', color: 'black' }}>
 					<ListItem button onClick={() => setOpen(!open)}>
-						<ListItemIcon>
+						<ListItemIcon aria-label="Área Administrativa">
 							<ExtensionIcon />
 						</ListItemIcon>
 						<ListItemText primary={'Área Administrativa'} />

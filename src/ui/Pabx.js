@@ -23,14 +23,12 @@ import { Height } from '@material-ui/icons';
 const useStyles = makeStyles({
 	box: {
 		border: '5px',
-		backgroundColor: 'red',
 		/* float: 'center',
 		textAlign: 'center', */
 		width: '100px',
 		height: '250px'
 	},
 	titulo: {
-		color: 'red',
 		marginTop: "5%"/* ,
 		textAlign: 'center' */
 	},

@@ -26,11 +26,39 @@ import Imagemprotan from '../img/Carousel/Imagem2protan.png'
 import Imagemtritano from '../img/Carousel/Imagem2tritano.png'
 
 import letreiro from '../img/Carousel/letreiro.png'
+import letreirodeutro from '../img/Carousel/letreirodeutro.png'
+import letreiroprotan from '../img/Carousel/letreiroprotan.png'
+import letreirotritano from '../img/Carousel/letreirotritano.png'
 
 import axios from 'axios';
 
 import './Components/ImageSlider/style.css'
 import { Height } from '@material-ui/icons';
+
+let letreiroImg, bkgImg, appBarColor
+let bkgCorrection = localStorage.getItem('bkgCorrection')
+switch (bkgCorrection) {
+	case 'deutro':
+		letreiroImg = letreirodeutro
+		bkgImg = Imagemdeutro
+		appBarColor = '#D9C10D'
+		break;
+	case 'protan':
+		letreiroImg = letreiroprotan
+		bkgImg = Imagemprotan
+		appBarColor = '#c2ab00'
+		break;
+	case 'tritano':
+		letreiroImg = letreirotritano
+		bkgImg = Imagemtritano
+		appBarColor = '#ff918f'
+		break;
+	default:
+		letreiroImg = letreiro
+		bkgImg = Imagem
+		appBarColor = '#ffa600'
+		break;
+}
 
 const useStyles = makeStyles({
 	box: {
@@ -42,8 +70,9 @@ const useStyles = makeStyles({
 		height: '250px',
 	},
 	titulo: {
-		color: 'orange',
-		marginTop: "5%",
+		color: 'black',
+		filter: `drop-shadow(2px 2px white)`,
+		marginBottom: "0",
 		textAlign: 'center'
 	},
 	div: {
@@ -52,23 +81,6 @@ const useStyles = makeStyles({
 });
 
 export default function BasicCard() {
-
-	let bkgCorrection = localStorage.getItem('bkgCorrection')
-
-	switch (bkgCorrection) {
-		case 'deutro':
-			bkgCorrection = Imagemdeutro
-			break;
-		case 'protan':
-			bkgCorrection = Imagemprotan
-			break;
-		case 'tritano':
-			bkgCorrection = Imagemtritano
-			break;
-		default:
-			bkgCorrection = Imagem2
-			break;
-	}
 
 	const classes = useStyles()
 
@@ -80,26 +92,27 @@ export default function BasicCard() {
 	}, [])
 
 	const MyDiv = styled(Box)({
-		backgroundColor: '#fffef6', opacity: 1,
-		backgroundImage: 'repeating-radial-gradient( circle at 0 0, transparent 0, #fffef6 40px ), repeating-linear-gradient( #ffecbb55, #ffecbb )',
+		backgroundColor: 'white', opacity: 1,
+		backgroundImage: `repeating-radial-gradient( circle at 0 0, transparent 0, white 40px ), repeating-linear-gradient( ${appBarColor}, ${appBarColor}  )`,
 	});
 
 	return (
 		<div className={classes.div} >
 			<div>
-				<img src={bkgCorrection} style={{
+				<img src={bkgImg} style={{
 					marginTop: '-50px', float: 'top',
 					width: '100%', maxWidth: '800px',
 					borderBottomLeftRadius: `15px`,
 					borderBottomRightRadius: `15px`
 				}} />
-				<img src={letreiro} style={{
+				<img src={letreiroImg} style={{
 					marginTop: '-50px', position: 'absolute',
 					left: '50%',
-					top: '25%',
+					top: '28%',
 					width: '25%',
 					minWidth: '150px',
-					transform: 'translate(-50%, -50%)'/* , float: 'top' */
+					transform: 'translate(-50%, -50%)',/* , float: 'top' */
+					filter: `drop-shadow(5px 5px 5px ${appBarColor})`
 				}} />
 			</div>
 

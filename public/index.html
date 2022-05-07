@@ -45,26 +45,26 @@
 </html>
 
 <script>
-	setTimeout(function () {
+	let timerColor = setTimeout(function () {
 
 		let bkgCorrection = localStorage.getItem('bkgCorrection')
 
 		switch (bkgCorrection) {
-			case 'deutro':
-				bkgCorrection = '#D9C10D'
+			case 'deutro': bkgCorrection = '#D9C10D'
 				break;
-			case 'protan':
-				bkgCorrection = '#C4AC00'
+			case 'protan': bkgCorrection = '#C4AC00'
 				break;
-			case 'tritano':
-				bkgCorrection = '#FF8E8D'
+			case 'tritano': bkgCorrection = '#FF8E8D'
 				break;
-			default:
-				bkgCorrection = '#FFA500'
+			default: bkgCorrection = '#FFA500'
 				break;
 		}
 
 		document.querySelector('.makeStyles-appBar-2')
 			.style.backgroundColor = bkgCorrection;
-	}, 1000);
+
+		if (timerColor != null) {
+			clearTimeout(timerColor);
+		}
+	}, 100);
 </script>

@@ -36,11 +36,11 @@ export default function MediaControlCard() {
 					</IconButton>
 				</Box>
 			</Box>
-			<CardMedia
+			{/* <CardMedia
 				component="img"
 				sx={{ maxWidth: 151 }}
 				image="https://i.scdn.co/image/ab67656300005f1f50b6a2e0529cebac8830a8c1"
-			/>
+			/> */}
 		</Card>
 	);
 }
