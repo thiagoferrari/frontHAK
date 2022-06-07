@@ -190,7 +190,7 @@ export default function ADMRamalForm() {
 					<FormControl className={classes.checkbox}>
 
 						<InputLabel>Setor</InputLabel>
-						<Tooltip title="Ao preencher o Colaborador, será definido auto. o setor do Colaborador ">
+						<Tooltip title="Ao preencher o Colaborador, será definido auto. seu setor.">
 							<Select value={Number(form.idSetor)} color="secondary"
 								onChange={e => (setForm({ ...form, idSetor: e.target.value }))}
 								variant="outlined" fullWidth

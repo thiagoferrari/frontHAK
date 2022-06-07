@@ -309,7 +309,7 @@ export default function (props) {
 					</ListItem>
 				</Link>
 
-				<PodcastCard sx={{ maxWidth: '90%' }} />
+				{/* <PodcastCard sx={{ maxWidth: '90%' }} /> */}
 			</Drawer>
 			<Box sx={{ flexGrow: 1, p: 3, marginY: '5%' }}>
 				{props.corpo}
